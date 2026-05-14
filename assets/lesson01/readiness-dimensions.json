@@ -1,0 +1,12 @@
+[
+  {"id":"data_version","label":"数据版本","detail":"输入数据和知识是否有版本与更新边界"},
+  {"id":"permissions","label":"权限控制","detail":"请求上下文是否带权限与租户边界"},
+  {"id":"citations","label":"证据引用","detail":"回答能否回到明确来源和依据"},
+  {"id":"tool_guardrails","label":"工具约束","detail":"工具调用是否有参数、动作和范围限制"},
+  {"id":"evaluation","label":"评测机制","detail":"是否有质量评测与错误归因方式"},
+  {"id":"observability","label":"观测能力","detail":"是否可追踪请求、证据、动作与失败"},
+  {"id":"rollback","label":"回滚机制","detail":"出错后是否有降级、回退与停止路径"},
+  {"id":"hitl","label":"HITL","detail":"高风险场景是否有人类接管与审批"},
+  {"id":"cost_awareness","label":"成本意识","detail":"是否考虑推理成本、缓存和资源预算"},
+  {"id":"ownership","label":"责任边界","detail":"是否明确系统 owner、运行 owner 与业务 owner"}
+]

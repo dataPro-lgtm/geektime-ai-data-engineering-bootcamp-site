@@ -1,0 +1,64 @@
+body.week01-lesson04-page {
+  --lesson04-bg: #f8fafc;
+  --lesson04-bg-2: #f1f5f9;
+  --lesson04-panel: #ffffff;
+  --lesson04-panel-alt: #f8fafc;
+  --lesson04-line: #e2e8f0;
+  --lesson04-text: #0f172a;
+  --lesson04-muted: #475569;
+  --lesson04-brand: #2563eb;
+  --lesson04-brand-hover: #1d4ed8;
+  --lesson04-warm: #ea580c;
+  --lesson04-warm-soft: #fff7ed;
+  --lesson04-green: #059669;
+  --lesson04-green-soft: #ecfdf5;
+  --lesson04-slate-soft: #f8fafc;
+  --lesson-page-bg: var(--lesson04-bg);
+  --lesson-page-bg-2: var(--lesson04-bg-2);
+  --lesson-page-panel: var(--lesson04-panel);
+  --lesson-page-panel-alt: var(--lesson04-panel-alt);
+  --lesson-page-line: var(--lesson04-line);
+  --lesson-page-text: var(--lesson04-text);
+  --lesson-page-muted: var(--lesson04-muted);
+  --lesson-page-brand: var(--lesson04-brand);
+  --lesson-page-brand-hover: var(--lesson04-brand-hover);
+  --lesson-page-warning: var(--lesson04-warm);
+  --lesson-page-success: var(--lesson04-green);
+}
+
+.week01-lesson04-page .hero-block h2 {
+  max-width: 15ch;
+}
+
+.week01-lesson04-page .lesson04-split-panel,
+.week01-lesson04-page .lesson04-deliverable-grid,
+.week01-lesson04-page .lesson04-project-grid {
+  margin-top: 1rem;
+}
+
+.week01-lesson04-page .lesson04-project-panel {
+  margin-top: 1rem;
+}
+
+.week01-lesson04-page .lesson04-side-note {
+  margin-top: 0.95rem;
+  margin-bottom: 0;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #0f172a;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.week01-lesson04-page .lesson04-risk-tabs .tab-content {
+  padding-bottom: 0.9rem;
+}
+
+.week01-lesson04-page .lesson04-risk-tabs table {
+  margin-top: 0.7rem;
+}
+
+@media (max-width: 991.98px) {
+}

@@ -1,0 +1,4 @@
+asset_id,asset_name,source_system,source_type,raw_resource,input_asset,serving_object,owner,business_use,update_frequency,pii_level,access_level,current_status,downstream_consumers,notes
+ticket_events,客服工单事件,helpdesk_db,database,raw_ticket_event,ticket_event_input,ticket_search_document,support_ops,客服问题追踪与检索,daily,medium,internal,draft,"RAG, analytics",
+knowledge_docs,知识库文档,cms,document,raw_knowledge_doc,knowledge_doc_input,knowledge_chunk,knowledge_ops,制度与 FAQ 检索,weekly,low,internal,draft,"RAG",
+call_recordings,客服录音,call_center,audio,raw_call_audio,audio_input,call_summary,service_quality,质检与摘要,weekly,high,restricted,review,"QA, compliance",

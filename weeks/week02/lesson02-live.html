@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<link href="../../assets/brand/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-4ffc8ad36dfc2f33c0a8ae3e098b6c10.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.36">
+
+  <title>极客时间 AI 数据工程实战营 – Week02｜Lesson02｜教师演示</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-46784ecb046602971330c0c63a16618e.css">
+  <link rel="stylesheet" href="../../assets/week02/week02-live-theme.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="w2l2-cover" class="slide level2 act-opening live-slide--hero teacher-slide-safe-width">
+<h2>从资源目录到输入地图：企业数据资产盘点方法论</h2>
+<div class="teacher-hero">
+<div class="stage-kicker">
+<p>Week02 · 教师演示</p>
+</div>
+<div class="teacher-hero-title">
+从资源目录到输入地图：企业数据资产盘点方法论
+</div>
+<div class="hero-subtitle">
+<p>这节课不讲“怎么把表填完整”，而是把学生推进到一个更工程化的判断：盘点不是列目录，而是把候选资源压成 AI 系统真正可接入的输入资产。</p>
+</div>
+<div class="hero-chip-row">
+<p><a href="#/w2l2-judgement" class="hero-chip">开场判断</a> <a href="#/w2l2-object-model" class="hero-chip">对象模型</a> <a href="#/w2l2-method" class="hero-chip">方法框架</a> <a href="#/w2l2-ticket-asset" class="hero-chip">资产卡</a> <a href="#/w2l2-admission" class="hero-chip">准入阶梯</a> <a href="#/w2l2-demo-transition" class="hero-chip">本地实操</a></p>
+</div>
+</div>
+<aside class="notes">
+<p>这节课要把学生从“资源清单思维”推进到“输入对象建模思维”，为课时3的 metadata、课时4的 contract、课时5的 manifest 铺接口。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="w2l2-judgement" class="slide level2 act-opening teacher-slide-safe-width">
+<h2>开场判断：盘点不是列目录，而是对象建模</h2>
+<div class="signal-surface teacher-card-tight teacher-card-balanced signal-surface--center">
+<div class="signal-kicker">
+<p>先立一个判断</p>
+</div>
+<div class="big-judgement">
+盘点不是列目录，而是把候选资源压成 AI 系统真正可接、可追、可扩、可继续写成 contract 与 manifest 的输入资产
+</div>
+<div class="support-line">
+<p>这节课不是登记资源，而是先定义后面系统到底认什么为输入对象。</p>
+</div>
+</div>
+</section>
+<section id="w2l2-judgement-a" class="slide level2 act-opening teacher-slide-safe-width">
+<h2>先把 3 个口语化判断立住</h2>
+<div class="teacher-grid-3col-safe">
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+资源目录
+</div>
+<p>回答的是：我们手里有什么。</p>
+</div>
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+输入地图
+</div>
+<p>回答的是：哪些值得接入，接入前要补什么条件。</p>
+</div>
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+服务对象
+</div>
+<p>回答的是：后面谁消费它，Week03 以后会长成什么。</p>
+</div>
+</div>
+</section>
+<section id="w2l2-bridge" class="slide level2 act-opening live-slide--visual-balance teacher-slide-safe-width">
+<h2>从课时1接过来：既然输入先坏，下一步就先定义输入对象</h2>
+<div class="figure-stage">
+<div class="figure-stage-tag">
+<p>Week02 课时链路</p>
+</div>
+<div class="teacher-flow-track teacher-flow-track--compact">
+<div class="teacher-flow-node">
+<p><strong>课时1</strong> <span>先立风险判断</span></p>
+</div>
+<div class="teacher-flow-arrow">
+<p>→</p>
+</div>
+<div class="teacher-flow-node teacher-flow-node--hub">
+<p><strong>课时2</strong> <span>定义真正的输入对象</span></p>
+</div>
+<div class="teacher-flow-arrow">
+<p>→</p>
+</div>
+<div class="teacher-flow-node">
+<p><strong>课时3</strong> <span>统一 metadata / PII</span></p>
+</div>
+<div class="teacher-flow-arrow">
+<p>→</p>
+</div>
+<div class="teacher-flow-node">
+<p><strong>课时4</strong> <span>把 contract 做成门禁</span></p>
+</div>
+<div class="teacher-flow-arrow">
+<p>→</p>
+</div>
+<div class="teacher-flow-node">
+<p><strong>课时5</strong> <span>把 manifest 接到 ingest</span></p>
+</div>
+</div>
+<div class="figure-caption">
+<p>上一讲讲的是“输入问题会先于模型问题摧毁系统”；这一讲开始回答“那团队下一步先做什么”。</p>
+</div>
+</div>
+</section>
+<section id="w2l2-object-model" class="slide level2 act-framework teacher-slide-safe-width">
+<h2>先把对象分清：source、input asset、serving object 不是一回事</h2>
+<div class="figure-stage">
+<div class="figure-stage-tag">
+<p>三层对象模型</p>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../assets/week02/week02-lesson02-object-model.png" class="teacher-figure teacher-zoomable"></p>
+<figcaption>课时2三层对象模型</figcaption>
+</figure>
+</div>
+<div class="figure-caption">
+<p>企业里最常见的混乱，不是“没资源”，而是把原始资源、输入资产和服务对象混成一层。</p>
+</div>
+</div>
+<aside class="notes">
+<p>先把三层对象看清。下一页再讲混层以后会怎么坏，最后一页再把每层回答的问题讲清。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="w2l2-object-model-b" class="slide level2 act-framework teacher-slide-safe-width">
+<h2>这三层一旦混了，会怎样</h2>
+<div class="signal-surface teacher-card-tight teacher-card-balanced signal-surface--center">
+<div class="teacher-card-title">
+这三层一旦混了，会怎样
+</div>
+<div class="bullet-stack">
+<ul>
+<li>把原始资源直接当输入资产：后面写不出稳定 <code>contract</code></li>
+<li>把输入资产直接当服务对象：Week03 ingest 边界持续漂移</li>
+<li>以为“数据库里那张表”天然就是 AI 输入：引用、过滤、权限都会跟着漂</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="w2l2-object-model-a" class="slide level2 act-framework live-slide--table-safe teacher-slide-safe-width">
+<h2>再把这三层对象各自回答什么问题讲清</h2>
+<div class="launch-table">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>对象</th>
+<th>真正回答的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>source system / raw resource</code></td>
+<td>世界原貌是什么</td>
+</tr>
+<tr class="even">
+<td><code>input asset</code></td>
+<td>什么值得接、怎么接、谁负责</td>
+</tr>
+<tr class="odd">
+<td><code>serving object</code></td>
+<td>下游如何稳定消费</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="w2l2-method" class="slide level2 act-framework teacher-slide-safe-width">
+<h2>一套可复用的方法：发现资源 → 资格审查 → 消费映射</h2>
+<div class="teacher-grid-2col-safe">
+<div class="figure-stage">
+<div class="figure-stage-tag">
+<p>对象建模主方法</p>
+</div>
+<div class="teacher-flow-track teacher-flow-track--compact">
+<div class="teacher-flow-node">
+<p><strong>发现资源</strong> <span>世界里有什么</span></p>
+</div>
+<div class="teacher-flow-arrow">
+<p>→</p>
+</div>
+<div class="teacher-flow-node teacher-flow-node--hub">
+<p><strong>资格审查</strong> <span>有没有资格成为输入资产</span></p>
+</div>
+<div class="teacher-flow-arrow">
+<p>→</p>
+</div>
+<div class="teacher-flow-node">
+<p><strong>消费映射</strong> <span>后续谁来消费它</span></p>
+</div>
+</div>
+<div class="figure-caption">
+<p>盘点的终点不是“登记完成”，而是形成消费路径。消费路径不清，后面的 metadata、contract、manifest 都会悬空。</p>
+</div>
+</div>
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+先把三件事立住
+</div>
+<div class="bullet-stack">
+<ul>
+<li>发现资源：先把候选对象找出来，不急着宣布接入</li>
+<li>资格审查：不是所有资源都应该立刻进系统</li>
+<li>消费映射：只有明确后续消费者，盘点才真正进入工程链</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="w2l2-four-questions" class="slide level2 act-framework teacher-slide-safe-width">
+<h2>资格审查永远问四个问题：事实、证据、边界、责任</h2>
+<div class="teacher-grid-2x2">
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+事实是什么
+</div>
+<p>主键、状态、时间、版本是不是稳定。</p>
+</div>
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+证据是什么
+</div>
+<p>以后引用它时，能不能回到原处。</p>
+</div>
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+边界是什么
+</div>
+<p>谁能看、谁能搜、哪些字段必须脱敏。</p>
+</div>
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+责任是什么
+</div>
+<p>谁拥有口径、谁更新、出了问题谁拍板。</p>
+</div>
+</div>
+</section>
+<section id="w2l2-fields" class="slide level2 act-case live-slide--table-safe teacher-slide-safe-width">
+<h2>真正有用的盘点表，不是三列，而是四组字段</h2>
+<div class="launch-table">
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>组别</th>
+<th>代表字段</th>
+<th>真正作用</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>身份与事实组</td>
+<td><code>asset_id / asset_name / asset_class / business_fact / source_system</code></td>
+<td>它到底是谁，承载什么业务事实</td>
+</tr>
+<tr class="even">
+<td>责任与更新组</td>
+<td><code>owner / update_mode / freshness_expectation</code></td>
+<td>谁负责，它怎么更新</td>
+</tr>
+<tr class="odd">
+<td>边界与风险组</td>
+<td><code>access_scope / pii_level / risk_tags</code></td>
+<td>谁能看、谁能入模、风险在哪</td>
+</tr>
+<tr class="even">
+<td>消费与接入组</td>
+<td><code>candidate_consumers / evidence_locator / admission_status / notes</code></td>
+<td>谁消费它，为什么 ready / hold / exclude</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="w2l2-fields-a" class="slide level2 act-case teacher-slide-safe-width">
+<h2>再把这四组字段讲口语化一点</h2>
+<div class="teacher-grid-2x2">
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+身份与事实组
+</div>
+<p>先回答“它到底是谁，承载哪种业务事实”。</p>
+</div>
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+责任与更新组
+</div>
+<p>先回答“谁负责，它是全量、增量还是版本替换”。</p>
+</div>
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+边界与风险组
+</div>
+<p>先回答“谁能看、谁能送进模型、最先要盯的风险是什么”。</p>
+</div>
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+消费与接入组
+</div>
+<p>先回答“后面谁消费它，以及为什么现在 ready / hold / exclude”。</p>
+</div>
+</div>
+</section>
+<section id="w2l2-antipatterns" class="slide level2 act-case teacher-slide-safe-width">
+<h2>企业盘点最容易失败，不是因为不会列，而是做了三种假动作</h2>
+<div class="teacher-grid-3col-safe">
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+只列资源目录
+</div>
+<p>看起来得到一张完整清单，但两周后还是写不出稳定 <code>contract</code>。</p>
+</div>
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+只写字段说明
+</div>
+<p>字段解释很细，owner、边界、消费关系还是不清楚。</p>
+</div>
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+不写资格判断
+</div>
+<p>什么都接、什么都想试，最后 ingest 入口和权限边界一起漂。</p>
+</div>
+</div>
+</section>
+<section id="w2l2-ticket-asset" class="slide level2 act-case teacher-slide-safe-width">
+<h2>Ticket 资产：最容易被误以为“天然可接”</h2>
+<div class="teacher-grid-2col-safe">
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+重点列
+</div>
+<div class="launch-table">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>重点列</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ticket_id / status / priority</code></td>
+<td>保住事实主键和状态口径</td>
+</tr>
+<tr class="even">
+<td><code>tenant_id / owner_team</code></td>
+<td>保住边界和责任</td>
+</tr>
+<tr class="odd">
+<td><code>created_at / updated_at</code></td>
+<td>保住时间窗和增量起点</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+最常见误判
+</div>
+<div class="bullet-stack">
+<ul>
+<li>把评论流和主工单事实混成一层</li>
+<li>没有 <code>tenant_id</code> 还想做跨租户检索</li>
+<li>只写字段，不写 admission 判断</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="w2l2-document-asset" class="slide level2 act-case teacher-slide-safe-width">
+<h2>Document 资产：版本、章节和定位不清，后面就没法 citation</h2>
+<div class="teacher-grid-2col-safe">
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+重点列
+</div>
+<div class="launch-table">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>重点列</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>doc_id / doc_version</code></td>
+<td>保住版本身份</td>
+</tr>
+<tr class="even">
+<td><code>page_no / section_path</code></td>
+<td>保住引用回指</td>
+</tr>
+<tr class="odd">
+<td><code>access_scope / pii_level</code></td>
+<td>保住过滤和权限</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+最常见误判
+</div>
+<div class="bullet-stack">
+<ul>
+<li>正文在，但版本不在</li>
+<li>能检索，不能 citation</li>
+<li>只记文件名，不记章节定位</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="w2l2-audio-asset" class="slide level2 act-case teacher-slide-safe-width">
+<h2>Audio 资产：只有 transcript，没有时间锚点，责任就会漂</h2>
+<div class="teacher-grid-2col-safe">
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+重点列
+</div>
+<div class="launch-table">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>重点列</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>call_id / speaker_role</code></td>
+<td>保住对话角色</td>
+</tr>
+<tr class="even">
+<td><code>start_ts / end_ts</code></td>
+<td>保住证据切片</td>
+</tr>
+<tr class="odd">
+<td><code>redaction_flag / pii_level</code></td>
+<td>保住隐私边界</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+最常见误判
+</div>
+<div class="bullet-stack">
+<ul>
+<li>只有 transcript，没有时间锚点</li>
+<li>角色错位导致责任判断漂移</li>
+<li>脱敏在下游补，已经晚了</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="w2l2-video-asset" class="slide level2 act-case teacher-slide-safe-width">
+<h2>Video 资产：分段、OCR 和发布边界必须在盘点阶段就立住</h2>
+<div class="teacher-grid-2col-safe">
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+重点列
+</div>
+<div class="launch-table">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>重点列</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>video_id / segment_ts</code></td>
+<td>保住片段边界</td>
+</tr>
+<tr class="even">
+<td><code>frame_ts / ocr_text</code></td>
+<td>保住画面证据</td>
+</tr>
+<tr class="odd">
+<td><code>access_scope / release_status</code></td>
+<td>保住发布和使用边界</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+最常见误判
+</div>
+<div class="bullet-stack">
+<ul>
+<li>把整段视频当单个对象</li>
+<li>OCR 出来就当事实，不做核验</li>
+<li>公开视频和内部培训视频不分级</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="w2l2-admission" class="slide level2 act-delivery teacher-slide-safe-width">
+<h2>不是所有资产都该立刻接入：先做分层准入</h2>
+<div class="teacher-grid-2col-safe">
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+分层
+</div>
+<div class="launch-table">
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>分层</th>
+<th>进入条件</th>
+<th>典型动作</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ready_now</code></td>
+<td>事实、证据、边界、责任都基本清楚</td>
+<td>进入 Week03 ingest baseline</td>
+</tr>
+<tr class="even">
+<td><code>conditional</code></td>
+<td>价值高，但还缺一两个关键条件</td>
+<td>补 owner / 证据 / 权限后再接</td>
+</tr>
+<tr class="odd">
+<td><code>hold</code></td>
+<td>暂时不稳，但未来可能接</td>
+<td>留在 inventory，先不接入</td>
+</tr>
+<tr class="even">
+<td><code>exclude</code></td>
+<td>高风险或价值不成立</td>
+<td>明确写出不接原因</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="figure-stage">
+<div class="figure-stage-tag">
+<p>最小判断树</p>
+</div>
+<div class="teacher-flow-track teacher-flow-track--compact">
+<div class="teacher-flow-node">
+<p><strong>候选资源</strong> <span>先看有没有业务价值</span></p>
+</div>
+<div class="teacher-flow-arrow">
+<p>→</p>
+</div>
+<div class="teacher-flow-node teacher-flow-node--hub">
+<p><strong>四问资格审查</strong> <span>事实、证据、边界、责任</span></p>
+</div>
+<div class="teacher-flow-arrow">
+<p>→</p>
+</div>
+<div class="teacher-flow-node">
+<p><strong>分层准入</strong> <span>ready / conditional / hold / exclude</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="w2l2-demo-transition" class="slide level2 act-delivery teacher-slide-safe-width">
+<h2>进入仓库前，只确认 3 件事</h2>
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+进入仓库前，先看这 3 件事
+</div>
+<div class="bullet-stack">
+<ul>
+<li>这不是“填一份 CSV”，而是在仓库里落第一版输入地图</li>
+<li>先看列头和 4 条主资产样例，不要一口气滚完整份表</li>
+<li>每一行都要写出 <code>admission_status</code>，因为这列会直接通往 Week03</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="w2l2-demo-open" class="slide level2 act-delivery teacher-slide-safe-width">
+<h2>先看这一段最小本地样例</h2>
+<div class="teacher-grid-2col-safe">
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+最小样例
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource csv number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a></a>asset_id,asset_class,source_system,owner,update_mode,access_scope,pii_level,evidence_locator,candidate_consumers,admission_status,notes</span>
+<span id="cb1-2"><a></a>ticket_core,ticket,omnisupport,ops_analytics,incremental,internal,p1,ticket_id,"rag;tool",ready_now,"主事实对象"</span>
+<span id="cb1-3"><a></a>kb_edge_gateway,document,helpcenter,docs_team,versioned,internal,p2,"doc_version + page_no","rag;eval",conditional,"待补 section_path"</span>
+<span id="cb1-4"><a></a>call_quality_01,audio,ccaas,qa_team,append_only,restricted,p0,"call_id + start_ts","eval",hold,"需补 redaction"</span>
+<span id="cb1-5"><a></a>video_onboarding_01,video,lms,enablement,versioned,internal,p1,"video_id + segment_ts","rag",conditional,"待补 OCR 锚点"</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+本地先看这一个文件
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a></a><span class="ex">open</span> docs/blueprints/week02/asset_inventory_v1.csv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="bullet-stack">
+<ul>
+<li>先看列头</li>
+<li>再看 4 条主资产样例</li>
+<li>最后只讲 <code>admission_status</code></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="w2l2-demo-return" class="slide level2 act-delivery live-slide--table-safe teacher-slide-safe-width">
+<h2>把本地动作翻译回方法论</h2>
+<div class="launch-table">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>本地动作</th>
+<th>方法论含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>先写 <code>asset_class</code></td>
+<td>先把输入对象分型，而不是先堆字段</td>
+</tr>
+<tr class="even">
+<td>写 <code>source_system</code></td>
+<td>把世界原貌和系统对象建立映射</td>
+</tr>
+<tr class="odd">
+<td>写 <code>owner</code> / <code>access_scope</code></td>
+<td>先把责任和边界写进对象</td>
+</tr>
+<tr class="even">
+<td>写 <code>evidence_locator</code></td>
+<td>提前为 citation / tracing 留锚点</td>
+</tr>
+<tr class="odd">
+<td>写 <code>candidate_consumers</code></td>
+<td>让对象从一开始就面向未来消费方</td>
+</tr>
+<tr class="even">
+<td>写 <code>admission_status</code></td>
+<td>把盘点从登记动作切成准入判断</td>
+</tr>
+<tr class="odd">
+<td>在 <code>notes</code> 写原因</td>
+<td>让后续 contract / manifest 有判断依据</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="w2l2-next" class="slide level2 act-close teacher-slide-safe-width">
+<h2>行业信号与下一讲：盘点之后，真正被系统消费的是 metadata 接口</h2>
+<div class="teacher-grid-3col-safe">
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+OpenMetadata
+</div>
+<p>资产视图不再只有 schema，owner、lineage、usage、quality 已经是对象定义的一部分。</p>
+</div>
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+OpenLineage
+</div>
+<p>运行时对象正在被 dataset / job / run 重新组织，说明“对象边界”会直接影响后续治理和追踪。</p>
+</div>
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+Azure AI Search
+</div>
+<p>多模态检索越来越依赖明确的输入对象和 metadata，而不是“先接进来再慢慢补”。</p>
+</div>
+</div>
+<div class="signal-surface teacher-card-tight teacher-card-balanced">
+<div class="teacher-card-title">
+接下来进入课时3
+</div>
+<p>今天只是把对象盘清楚。下一讲开始回答：这些通过资格审查的对象，进入系统时最少要带哪些 metadata，哪些字段必须进入 PII 分级和运行时接口。</p>
+</div>
+</section>
+<section id="w2l2-reminders" class="slide level2 act-close live-slide--closing-summary teacher-slide-safe-width">
+<h2>本课提醒</h2>
+<div class="signal-surface signal-surface--center">
+<div class="signal-kicker">
+收口前确认
+</div>
+<div class="big-judgement">
+把“盘点是对象建模”讲透，再切本地；切完本地，要把每个动作翻译回方法论。
+</div>
+<div class="support-line">
+这节课讲的是输入地图，不是 Excel 技巧，也不是实验讲义。
+</div>
+</div>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../../assets/brand/logo-mark.svg" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': false,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":false},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: false,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: false,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="teacher-live-act-config" type="application/json">
+    {
+      "eyebrow": "Week02 教师演示",
+      "acts": [
+        {
+          "key": "act-1",
+          "label": "幕 1 · 开场判断",
+          "target": "w2l2-judgement",
+          "match": [
+            "w2l2-judgement",
+            "w2l2-judgement-a",
+            "w2l2-bridge"
+          ]
+        },
+        {
+          "key": "act-2",
+          "label": "幕 2 · 三层对象模型",
+          "target": "w2l2-object-model",
+          "match": [
+            "w2l2-object-model",
+            "w2l2-object-model-b",
+            "w2l2-object-model-a"
+          ]
+        },
+        {
+          "key": "act-3",
+          "label": "幕 3 · 方法框架",
+          "target": "w2l2-method",
+          "match": [
+            "w2l2-method",
+            "w2l2-four-questions"
+          ]
+        },
+        {
+          "key": "act-4",
+          "label": "幕 4 · 四组字段",
+          "target": "w2l2-fields",
+          "match": [
+            "w2l2-fields",
+            "w2l2-fields-a"
+          ]
+        },
+        {
+          "key": "act-5",
+          "label": "幕 5 · 盘点假动作",
+          "target": "w2l2-antipatterns",
+          "match": [
+            "w2l2-antipatterns"
+          ]
+        },
+        {
+          "key": "act-6",
+          "label": "幕 6 · 四类主资产",
+          "target": "w2l2-ticket-asset",
+          "match": [
+            "w2l2-ticket-asset",
+            "w2l2-document-asset",
+            "w2l2-audio-asset",
+            "w2l2-video-asset"
+          ]
+        },
+        {
+          "key": "act-7",
+          "label": "幕 7 · 分层准入",
+          "target": "w2l2-admission",
+          "match": [
+            "w2l2-admission"
+          ]
+        },
+        {
+          "key": "act-8",
+          "label": "幕 8 · 本地实操转场",
+          "target": "w2l2-demo-transition",
+          "match": [
+            "w2l2-demo-transition",
+            "w2l2-demo-open",
+            "w2l2-demo-return"
+          ]
+        },
+        {
+          "key": "act-9",
+          "label": "幕 9 · 行业信号与过渡",
+          "target": "w2l2-next",
+          "match": [
+            "w2l2-next"
+          ]
+        },
+        {
+          "key": "act-reminders",
+          "label": "幕 末 · 提醒",
+          "target": "w2l2-reminders",
+          "match": [
+            "w2l2-reminders"
+          ]
+        }
+      ]
+    }
+    </script>
+    <script src="../../assets/week02/week02-live-components.js"></script>
+    <script src="../../assets/week02/week02-live-interactions.js"></script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/datapro-lgtm\.github\.io\/geektime-ai-data-engineering-bootcamp-site\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

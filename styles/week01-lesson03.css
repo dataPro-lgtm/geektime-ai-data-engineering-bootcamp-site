@@ -1,0 +1,114 @@
+body.week01-lesson03-page {
+  --lesson03-bg: #f8fafc;
+  --lesson03-bg-2: #f1f5f9;
+  --lesson03-panel: #ffffff;
+  --lesson03-panel-alt: #f8fafc;
+  --lesson03-line: #e2e8f0;
+  --lesson03-line-strong: #cbd5e1;
+  --lesson03-text: #0f172a;
+  --lesson03-muted: #475569;
+  --lesson03-brand: #2563eb;
+  --lesson03-brand-hover: #1d4ed8;
+  --lesson03-brand-soft: #dbeafe;
+  --lesson03-warm: #ea580c;
+  --lesson03-warm-soft: #fff5eb;
+  --lesson03-green: #059669;
+  --lesson03-green-soft: #ecfeff;
+  --lesson-page-bg: var(--lesson03-bg);
+  --lesson-page-bg-2: var(--lesson03-bg-2);
+  --lesson-page-panel: var(--lesson03-panel);
+  --lesson-page-panel-alt: var(--lesson03-panel-alt);
+  --lesson-page-line: var(--lesson03-line);
+  --lesson-page-text: var(--lesson03-text);
+  --lesson-page-muted: var(--lesson03-muted);
+  --lesson-page-brand: var(--lesson03-brand);
+  --lesson-page-brand-hover: var(--lesson03-brand-hover);
+  --lesson-page-warning: var(--lesson03-warm);
+  --lesson-page-success: var(--lesson03-green);
+}
+
+.week01-lesson03-page .hero-block h2 {
+  max-width: 16ch;
+}
+
+.week01-lesson03-page .compare-grid,
+.week01-lesson03-page .gap-grid,
+.week01-lesson03-page .script-instinct-grid,
+.week01-lesson03-page .accident-grid {
+  margin-top: 1rem;
+}
+
+.week01-lesson03-page .platform-rail {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin: 1rem 0 1.2rem;
+}
+
+.week01-lesson03-page .platform-rail-step {
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--lesson03-line);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #ffffff, #f8fafc);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+}
+
+.week01-lesson03-page .platform-rail-label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  color: var(--lesson03-brand);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.week01-lesson03-page .layer-spotlight {
+  display: grid;
+  gap: 1rem;
+}
+
+.week01-lesson03-page .stage-card {
+  padding: 1.2rem 1.2rem 1.15rem;
+}
+
+.week01-lesson03-page .stage-card h3 {
+  margin-top: 0.8rem;
+}
+
+.week01-lesson03-page .stage-card strong {
+  display: block;
+  margin-top: 0.9rem;
+  margin-bottom: 0.35rem;
+  color: var(--lesson03-text);
+}
+
+.week01-lesson03-page .question-grid .info-card,
+.week01-lesson03-page .wrap-grid .info-card {
+  min-height: 100%;
+}
+
+@media (max-width: 1100px) {
+  .week01-lesson03-page .stage-grid,
+  .week01-lesson03-page .platform-rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 840px) {
+  .week01-lesson03-page .platform-rail {
+    grid-template-columns: 1fr;
+  }
+
+  .week01-lesson03-page main.content > section.level2:not(.hero-block) {
+    padding: 1.2rem 1.2rem 1.05rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .week01-lesson03-page table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

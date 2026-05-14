@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>附录｜模板库 – 极客时间 AI 数据工程实战营</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/brand/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-83964c086148dbcce42b8b2839afa52a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b6e1a04d849d0c8da8337c83cc104c04.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-83964c086148dbcce42b8b2839afa52a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-bb861a84f4a0f3202d72a8722f862893.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-80ecfb2d39ec7cfa7b96dc7abf51720b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-bb861a84f4a0f3202d72a8722f862893.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Sora:wght@500;600;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap">
+<meta property="og:site_name" content="极客时间 AI 数据工程实战营">
+<meta property="og:image" content="https://datapro-lgtm.github.io/geektime-ai-data-engineering-bootcamp-site/assets/brand/social-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://datapro-lgtm.github.io/geektime-ai-data-engineering-bootcamp-site/assets/brand/social-card.png">
+<link rel="icon" type="image/svg+xml" href="https://datapro-lgtm.github.io/geektime-ai-data-engineering-bootcamp-site/assets/brand/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://datapro-lgtm.github.io/geektime-ai-data-engineering-bootcamp-site/assets/brand/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://datapro-lgtm.github.io/geektime-ai-data-engineering-bootcamp-site/assets/brand/apple-touch-icon.png">
+<script>
+(function () {
+  var syncNavbarActive = function () {
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll(".navbar .nav-link[href]"));
+    if (!navLinks.length) return;
+
+    var normalizedPath = window.location.pathname.replace(/\/index\.html$/, "/");
+    var matcher = function (href) {
+      return href === "./index.html" || href === "../index.html" || href.endsWith("/index.html");
+    };
+
+    if (normalizedPath.indexOf("/appendix/") !== -1) {
+      matcher = function (href) { return href.indexOf("/appendix/index.html") !== -1; };
+    } else if (normalizedPath.match(/\/updates\.html$/)) {
+      matcher = function (href) { return href.indexOf("/updates.html") !== -1; };
+    } else if (normalizedPath.indexOf("/weeks/") !== -1) {
+      matcher = function (href) { return href.indexOf("/weeks/learning.html") !== -1; };
+    }
+
+    navLinks.forEach(function (link) {
+      link.classList.remove("active");
+      link.removeAttribute("aria-current");
+    });
+
+    var active = navLinks.find(function (link) {
+      return matcher(link.getAttribute("href") || "");
+    });
+
+    if (active) {
+      active.classList.add("active");
+      active.setAttribute("aria-current", "page");
+    }
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", syncNavbarActive, { once: true });
+  } else {
+    syncNavbarActive();
+  }
+
+  var path = window.location.pathname;
+  var script = document.createElement("script");
+  script.defer = true;
+  if (path.indexOf("/weeks/week01/") !== -1) {
+    script.src = "../../app.js";
+  } else if (path.indexOf("/weeks/") !== -1 || path.indexOf("/appendix/") !== -1) {
+    script.src = "../app.js";
+  } else {
+    script.src = "./app.js";
+  }
+  document.head.appendChild(script);
+})();
+</script>
+
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../assets/brand/logo-mark-inverse.svg" alt="" class="navbar-logo light-content">
+    <img src="../assets/brand/logo-mark-inverse.svg" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">极客时间 AI 数据工程实战营</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">首页</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../weeks/learning.html" aria-current="page"> 
+<span class="menu-text">周次学习</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../appendix/index.html"> 
+<span class="menu-text">附录</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../updates.html"> 
+<span class="menu-text">更新</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../appendix/index.html">附录｜术语、模板与阅读</a></li><li class="breadcrumb-item"><a href="../appendix/templates.html">模板库</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../assets/brand/logo-lockup-compact.svg" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../assets/brand/logo-lockup-compact-inverse.svg" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">周次学习</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../weeks/week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week01｜从 Demo 到上线：AI 为什么不能直接用？</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week01/lesson01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">课时1｜为什么你的 AI Demo 一上生产就翻车？</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week01/lesson02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">课时2｜知识库问答 + 工单联动怎么定义 Done</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week01/lesson03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">课时3｜别一上来就写 RAG：企业级 AI 到底该走哪条数据工程路线</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week01/lesson04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">课时4｜开营就把工程底座搭起来：项目骨架、风险边界与落地蓝图一次定清</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week01-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">实验｜项目基线与系统蓝图初始化</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week01-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">作业｜把 Demo 思维收口为工程蓝图</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../weeks/week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week02｜输入确定性保障——数据盘点与数据契约</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week02-lesson-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">课时1｜为什么输入问题会先于模型问题摧毁系统</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week02-lesson-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">课时2｜从资源目录到输入地图：企业数据资产盘点方法论</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week02-lesson-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">课时3｜多模态最小元数据与 PII 分级：文档、音频、视频、工单怎么统一</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week02-lesson-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">课时4｜把 Data Contract 做成工程门禁：Schema、语义、质量、兼容性</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week02-lesson-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">课时5｜契约驱动的采集策略：Manifest、增量窗口、拦截与 Week03 起跑线</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week02-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">实验｜四类数据契约与输入门禁最小闭环</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week02-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">作业｜资产清单、四类契约 v1 与采集计划</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../weeks/week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week03｜采集与入湖——Batch / CDC / Stream 的组合拳</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week03-lesson-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week03｜课时1｜从“能采上来”到“可重复采集”：为什么 ingest 可靠性决定下游一切</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week03-lesson-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week03｜课时2｜批量采集主链路：幂等写入、重跑设计与完整性校验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week03-lesson-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week03｜课时3｜增量与 CDC：cursor、WAL、乱序、去重与“不要轻易承诺 exactly-once”</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week03-lesson-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week03｜课时4｜从任务流到资产流：用 Dagster 组织 ingest、分区与回放</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week03-lesson-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week03｜课时5｜故障自愈与补数：Replay / Backfill / Runbook 怎么把链路拉回正轨</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week03-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">实验｜双源采集最小闭环：ticket + document ingest、state、report、replay</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week03-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">作业｜采集最小链路 v1、Runbook v1 与完整性报告</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../weeks/week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week04｜Lakehouse 底座——Iceberg 快照/演进/性能基线</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week04-lesson-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week04｜课时1｜为什么 AI 数据工程需要“有记忆的表”，而不只是能查的表</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week04-lesson-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week04｜课时2｜Iceberg 的状态模型：snapshot、manifest、metadata log 与 time travel</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week04-lesson-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week04｜课时3｜从 Week3 入湖到 Week4 湖仓：Bronze / Silver 最小表设计与 hidden partitioning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week04-lesson-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week04｜课时4｜PyIceberg 本地最小闭环：Catalog、Warehouse、写入、历史查看、Schema Evolution</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week04-lesson-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week04｜课时5｜性能基线不是调优冲动：files / history / snapshots 视角下的 Week4 验收</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week04-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">实验｜最小 Iceberg 闭环：catalog、warehouse、Bronze/Silver、time travel</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week04-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">作业｜Week04 Lakehouse 最小交付包与 baseline report</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../weeks/week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5：Transform 与语义层——把口径写进工程（给 BI 也给 Agent 用）</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week05-lesson-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week05｜课时1｜为什么 Week5 不是“做几个指标”：把业务口径变成工程接口</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week05-lesson-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week05｜课时2｜dbt 分层不是教条：从 sources / staging / intermediate / marts 到 AI 可消费数据产品</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week05-lesson-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week05｜课时3｜口径能不能负责，不看 SQL 多炫：tests、docs、lineage 与变更影响分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week05-lesson-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week05｜课时4｜语义层的现实主义：MetricFlow、Semantic Models 与本地 dbt Core 的真实边界</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week05-lesson-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week05｜课时5｜不让 Agent 裸写 SQL：受控指标查询工具 v1 的契约、权限与审计设计</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week05-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">实验｜把客服运营口径写进工程：用 dbt 产出 KPI 包，并封装安全指标查询工具 v1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week05-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">作业｜提交 Week5 指标包 v1：形成可负责的口径资产</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../weeks/week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6：资产化数据工厂——编排、回填与可追溯</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week06-lesson-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week06｜课时1｜为什么脚本跑通不等于数据产品可运营</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week06-lesson-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week06｜课时2｜Dagster Assets 与资产图：从任务流到资产流</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week06-lesson-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week06｜课时3｜Partition / Backfill / Replay：把补数做成可控动作</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week06-lesson-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week06｜课时4｜Asset Checks / Metadata / Run Evidence：把“跑过”升级成“可验收”</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week06-lesson-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week06｜课时5｜Data Factory Runbook：从个人脚本到团队可交接系统</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week06-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">实验｜资产图 + 回填 + 证据闭环</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week06-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">作业｜提交 Data Factory v1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../weeks/week07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7：非结构化数据工程</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week07-lesson-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7｜课时1｜为什么“抽出文本”不等于非结构化数据工程</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week07-lesson-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7｜课时2｜智能文档解析：布局、层级、表格、页码、坐标与 provenance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week07-lesson-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7｜课时3｜从 section 到 chunk：结构感知切片与 overlap 边界</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week07-lesson-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7｜课时4｜Evidence Anchor：让每个 chunk 可以回指原文位置</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week07-lesson-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7｜课时5｜解析质量与切片质检：把 Week8 索引准入做成工程门禁</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week07-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">实验｜把 Week3 文档资产升级成 Week8-ready 文档资产</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week07-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">作业｜提交文档资产 v1 与质检报告</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../weeks/week08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8：从“搜得到”到“答得稳”——检索 × 生成的一体化工程闭环</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week08-lesson-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8｜课时1｜为什么“搜得到”不等于“答得稳”：RAG 工程闭环的系统边界</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week08-lesson-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8｜课时2｜索引资产化：Embedding、Index Release、增量更新与回滚边界</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week08-lesson-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8｜课时3｜混合检索：pgvector + PostgreSQL FTS + RRF + Metadata Filter</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week08-lesson-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8｜课时4｜重排与生成门禁：Cross-Encoder rerank、证据筛选与 no-answer 策略</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week08-lesson-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8｜课时5｜RAG API 契约化：结构化输出、引用证据、Prompt as Code、审计日志</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week08-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">实验｜跑通最小 RAG 工程闭环</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week08-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">作业｜提交 RAG Service Pack v1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../weeks/week09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9：Agent Skills 开放标准——把工作流封装成可移植的 Skill Pack</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week09-lesson-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9｜课时1｜为什么 Agent Skills 不是提示词模板，而是工程工艺资产</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week09-lesson-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9｜课时2｜SKILL.md 与 progressive disclosure：让 Agent 按需发现和加载工作流</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week09-lesson-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9｜课时3｜把 Week2-Week8 的规范封装成 5 个最小 skills</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week09-lesson-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9｜课时4｜scripts / references / assets：让 Skill Pack 可执行、可校验、可留证据</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week09-lesson-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9｜课时5｜从 repo-scoped skills 到持续演进：Codex、Claude Code 与 Week10-15 的接口</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week09-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">实验｜跑通 Skill Pack v0.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week09-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">作业｜提交 OmniSupport Skill Pack v0.1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../appendix/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">附录｜术语、模板与阅读</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">术语表</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/templates.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">模板库</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/faq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FAQ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/reading-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">阅读清单</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="templates.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li><li><a href="templates.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../appendix/index.html">附录｜术语、模板与阅读</a></li><li class="breadcrumb-item"><a href="../appendix/templates.html">模板库</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">附录｜模板库</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="模板库" class="level2">
+<h2 class="anchored" data-anchor-id="模板库">模板库</h2>
+<p>这些模板不是“以后再补”的占位条目，而是课程每一周都会落下来的正式交付物。 你在正文里看到的 blueprint、runbook、report，最终都应该能在这里找到对应角色。</p>
+</section>
+<section id="week01问题定义与系统蓝图" class="level2">
+<h2 class="anchored" data-anchor-id="week01问题定义与系统蓝图">Week01｜问题定义与系统蓝图</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>模板</th>
+<th>典型文件</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>项目问题定义模板</td>
+<td><a href="../assets/templates/week01/problem_definition_v1.md" download="">problem_definition_v1.md</a></td>
+<td>把业务问题、用户场景、边界和验收方式写清。</td>
+</tr>
+<tr class="even">
+<td>系统蓝图模板</td>
+<td><a href="../assets/templates/week01/system_blueprint_v1.md" download="">system_blueprint_v1.md</a></td>
+<td>把系统对象、模块边界、输入输出和依赖关系画清楚。</td>
+</tr>
+<tr class="odd">
+<td>Definition of Done 模板</td>
+<td><a href="../assets/templates/week01/definition_of_done_v1.md" download="">definition_of_done_v1.md</a></td>
+<td>把功能、工程、风险和质量 Done 写成可验收标准。</td>
+</tr>
+<tr class="even">
+<td>风险边界检查模板</td>
+<td><a href="../assets/templates/week01/risk_boundary_checklist_v1.md" download="">risk_boundary_checklist_v1.md</a></td>
+<td>提前识别 prompt、tool、data、policy 的风险边界。</td>
+</tr>
+<tr class="odd">
+<td>交付标准记分卡</td>
+<td><a href="../assets/templates/week01/delivery_scorecard_v1.md" download="">delivery_scorecard_v1.md</a></td>
+<td>对齐场景、业务目标、成功指标、风险等级和灰度状态。</td>
+</tr>
+<tr class="even">
+<td>上线前质量门禁表</td>
+<td><a href="../assets/templates/week01/quality_gate_table_v1.md" download="">quality_gate_table_v1.md</a></td>
+<td>把质量阈值、评测集、owner 和 fallback action 写成上线门禁。</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="week02输入准入与数据契约" class="level2">
+<h2 class="anchored" data-anchor-id="week02输入准入与数据契约">Week02｜输入准入与数据契约</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>模板</th>
+<th>典型文件</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>数据资产清单模板</td>
+<td><a href="../assets/templates/week02/asset_inventory_v1.csv" download="">asset_inventory_v1.csv</a></td>
+<td>盘点 source、asset、serving object 的边界。</td>
+</tr>
+<tr class="even">
+<td>Metadata 最小集模板</td>
+<td><a href="../assets/templates/week02/metadata_minimums_v1.md" download="">metadata_minimums_v1.md</a></td>
+<td>定义运行期至少需要哪些 metadata。</td>
+</tr>
+<tr class="odd">
+<td>PII 策略矩阵模板</td>
+<td><a href="../assets/templates/week02/pii_policy_matrix_v1.csv" download="">pii_policy_matrix_v1.csv</a></td>
+<td>明确字段、动作、场景三者关系。</td>
+</tr>
+<tr class="even">
+<td>数据契约模板</td>
+<td><a href="../assets/templates/week02/data_contract_template_v1.json" download="">data_contract_template_v1.json</a></td>
+<td>把 schema、语义、策略和质量边界写成系统可消费规则。</td>
+</tr>
+<tr class="odd">
+<td>Manifest 模板</td>
+<td><a href="../assets/templates/week02/source_manifest_template_v1.json" download="">source_manifest_template_v1.json</a></td>
+<td>把一次 ingest 的输入声明写清楚。</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="week03ingest-与恢复基线" class="level2">
+<h2 class="anchored" data-anchor-id="week03ingest-与恢复基线">Week03｜Ingest 与恢复基线</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>模板</th>
+<th>典型文件</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ingestion Baseline 模板</td>
+<td><a href="../assets/templates/week03/ingestion_baseline_v1.md" download="">ingestion_baseline_v1.md</a></td>
+<td>定义 Week03 的最小 ingest 能力边界。</td>
+</tr>
+<tr class="even">
+<td>Batch 设计模板</td>
+<td><a href="../assets/templates/week03/batch_ingestion_design_v1.md" download="">batch_ingestion_design_v1.md</a></td>
+<td>说明 batch ingest 主链路和完整性判断。</td>
+</tr>
+<tr class="odd">
+<td>Incremental 设计模板</td>
+<td><a href="../assets/templates/week03/incremental_ingest_strategy_v1.md" download="">incremental_ingest_strategy_v1.md</a></td>
+<td>写清 cursor、watermark、checkpoint 和 late arrival 边界。</td>
+</tr>
+<tr class="even">
+<td>Checkpoint 状态模板</td>
+<td><a href="../assets/templates/week03/checkpoint_state_v1.md" download="">checkpoint_state_v1.md</a></td>
+<td>把状态对象持久化结构写清楚。</td>
+</tr>
+<tr class="odd">
+<td>资产流设计模板</td>
+<td><a href="../assets/templates/week03/asset_flow_plan_v1.md" download="">asset_flow_plan_v1.md</a></td>
+<td>说明 asset graph 如何接住 manifest 和 ingest。</td>
+</tr>
+<tr class="even">
+<td>Partition / Backfill 模板</td>
+<td><a href="../assets/templates/week03/partition_backfill_strategy_v1.md" download="">partition_backfill_strategy_v1.md</a></td>
+<td>说明分区和补数策略。</td>
+</tr>
+<tr class="odd">
+<td>Replay / Backfill 模板</td>
+<td><a href="../assets/templates/week03/replay_backfill_strategy_v1.md" download="">replay_backfill_strategy_v1.md</a></td>
+<td>区分 retry、rerun、replay、restore、backfill。</td>
+</tr>
+<tr class="even">
+<td>Runbook 模板</td>
+<td><a href="../assets/templates/week03/ingestion_runbook_v1.md" download="">ingestion_runbook_v1.md</a></td>
+<td>把恢复动作收成团队可执行手册。</td>
+</tr>
+<tr class="odd">
+<td>Delivery Summary 模板</td>
+<td><a href="../assets/templates/week03/delivery_summary_v1.md" download="">delivery_summary_v1.md</a></td>
+<td>沉淀 smoke、drill、delivery 的结论和证据。</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="week04lakehouse-底座iceberg-快照演进性能基线" class="level2">
+<h2 class="anchored" data-anchor-id="week04lakehouse-底座iceberg-快照演进性能基线">Week04｜Lakehouse 底座——Iceberg 快照/演进/性能基线</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>模板</th>
+<th>典型文件</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Lakehouse Foundation 模板</td>
+<td><a href="../assets/templates/week04/lakehouse_foundation_v1.md" download="">lakehouse_foundation_v1.md</a></td>
+<td>说明为什么 Week04 要从“能查表”升级到“有记忆的表”。</td>
+</tr>
+<tr class="even">
+<td>Source to Iceberg Mapping 模板</td>
+<td><a href="../assets/templates/week04/source_to_iceberg_mapping_v1.md" download="">source_to_iceberg_mapping_v1.md</a></td>
+<td>把 Week03 baseline、PostgreSQL / MinIO 输入映射到 Iceberg 表。</td>
+</tr>
+<tr class="odd">
+<td>Bronze / Silver Table Design 模板</td>
+<td><a href="../assets/templates/week04/bronze_silver_table_design_v1.md" download="">bronze_silver_table_design_v1.md</a></td>
+<td>说明最小 4 表、Bronze / Silver 和字段映射。</td>
+</tr>
+<tr class="even">
+<td>Catalog Runtime Plan 模板</td>
+<td><a href="../assets/templates/week04/catalog_runtime_plan_v1.md" download="">catalog_runtime_plan_v1.md</a></td>
+<td>把 PostgreSQL SQL catalog、warehouse、table location 和 devbox 入口写清。</td>
+</tr>
+<tr class="odd">
+<td>Materialization Report Notes 模板</td>
+<td><a href="../assets/templates/week04/materialization_report_notes_v1.md" download="">materialization_report_notes_v1.md</a></td>
+<td>解释 <code>reports/week04/materialization_report.json</code> 里的关键证据。</td>
+</tr>
+<tr class="even">
+<td>Time Travel 演示模板</td>
+<td><a href="../assets/templates/week04/time_travel_demo_report_v1.md" download="">time_travel_demo_report_v1.md</a></td>
+<td>记录 snapshot / history / time travel 是否真实可演示。</td>
+</tr>
+<tr class="odd">
+<td>Schema Evolution 演示模板</td>
+<td><a href="../assets/templates/week04/schema_evolution_demo_report_v1.md" download="">schema_evolution_demo_report_v1.md</a></td>
+<td>记录 schema 演进实验、前后状态和验收结论。</td>
+</tr>
+<tr class="even">
+<td>Iceberg Baseline Report 模板</td>
+<td><a href="../assets/templates/week04/iceberg_baseline_report_v1.md" download="">iceberg_baseline_report_v1.md</a></td>
+<td>写清 files、history、snapshots 与当前性能基线。</td>
+</tr>
+<tr class="odd">
+<td>Course Site Sync Packet 模板</td>
+<td><a href="../assets/templates/week04/course_site_sync_packet_v1.md" download="">course_site_sync_packet_v1.md</a></td>
+<td>防止课程站点命令、路径和真实 OmniSupport Copilot 仓库脱节。</td>
+</tr>
+<tr class="even">
+<td>Week04 Runbook 模板</td>
+<td><a href="../assets/templates/week04/week04_runbook_v1.md" download="">week04_runbook_v1.md</a></td>
+<td>交付给团队的最小 Iceberg 闭环操作入口。</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="week05transform-与语义层把口径写进工程给-bi-也给-agent-用" class="level2">
+<h2 class="anchored" data-anchor-id="week05transform-与语义层把口径写进工程给-bi-也给-agent-用">Week05｜Transform 与语义层——把口径写进工程（给 BI 也给 Agent 用）</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>模板</th>
+<th>典型文件</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Metric Interface Card 模板</td>
+<td><a href="../assets/templates/week05/metric_interface_card_v1.md" download="">metric_interface_card_v1.md</a></td>
+<td>写清 metric name、business question、grain、source、owner、tests、roles 和 audit。</td>
+</tr>
+<tr class="even">
+<td>dbt Model Contract 模板</td>
+<td><a href="../assets/templates/week05/dbt_model_contract_v1.md" download="">dbt_model_contract_v1.md</a></td>
+<td>说明 dbt model 的 layer、grain、输入输出、PII 状态和测试文档。</td>
+</tr>
+<tr class="odd">
+<td>Metric Registry Entry 模板</td>
+<td><a href="../assets/templates/week05/metric_registry_entry_v1.yml" download="">metric_registry_entry_v1.yml</a></td>
+<td>用 YAML 固定指标、维度、过滤器、角色和时间窗口白名单。</td>
+</tr>
+<tr class="even">
+<td>Lineage Impact Notes 模板</td>
+<td><a href="../assets/templates/week05/lineage_impact_notes_v1.md" download="">lineage_impact_notes_v1.md</a></td>
+<td>记录一次口径变更对 source、marts、registry、tool 和 eval 的影响。</td>
+</tr>
+<tr class="odd">
+<td>Tool Contract Review Checklist</td>
+<td><a href="../assets/templates/week05/tool_contract_review_checklist_v1.md" download="">tool_contract_review_checklist_v1.md</a></td>
+<td>检查 schema、registry、白名单、参数化查询、safe view、正负例和 audit。</td>
+</tr>
+<tr class="even">
+<td>Week05 Delivery Summary 模板</td>
+<td><a href="../assets/templates/week05/week05_delivery_summary_v1.md" download="">week05_delivery_summary_v1.md</a></td>
+<td>收口 Week05 指标包的最终结论、证据、边界和后续交接。</td>
+</tr>
+<tr class="odd">
+<td>Positive / Negative Query Examples 模板</td>
+<td><a href="../assets/templates/week05/query_examples_v1.md" download="">query_examples_v1.md</a></td>
+<td>记录受控 KPI 工具的正例、拒绝例、denial code 和 audit 字段。</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="week06资产化数据工厂编排回填与可追溯" class="level2">
+<h2 class="anchored" data-anchor-id="week06资产化数据工厂编排回填与可追溯">Week06｜资产化数据工厂——编排、回填与可追溯</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>模板</th>
+<th>典型项目路径</th>
+<th>谁会消费</th>
+<th>最低合格标准</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="../assets/templates/week06/data_factory_blueprint_v1.md" download="">Data Factory Blueprint 模板</a></td>
+<td><code>docs/blueprints/week06/week06-data-factory-blueprint.md</code></td>
+<td>学员、助教、后续维护者</td>
+<td>写清 Week06 scope、non-goals、最小 asset graph 和验收口径</td>
+</tr>
+<tr class="even">
+<td><a href="../assets/templates/week06/asset_graph_plan_v1.md" download="">Asset Graph Plan 模板</a></td>
+<td><code>docs/blueprints/week06/week06-asset-graph.md</code></td>
+<td>数据工程同学、下游 Week07 / Week08</td>
+<td>至少列出 5 个关键 asset、owner、upstream/downstream、optional 节点</td>
+</tr>
+<tr class="odd">
+<td><a href="../assets/templates/week06/partition_backfill_strategy_v1.md" download="">Partition / Backfill Strategy 模板</a></td>
+<td><code>docs/blueprints/week06/week06-partition-backfill-strategy.md</code></td>
+<td>操作员、助教</td>
+<td>写清 daily partition、默认 <code>2026-04-17</code>、dry-run backfill 和 idempotency guard</td>
+</tr>
+<tr class="even">
+<td><a href="../assets/templates/week06/run_evidence_schema_notes_v1.md" download="">Run Evidence Spec 模板</a></td>
+<td><code>docs/blueprints/week06/week06-run-evidence-spec.md</code></td>
+<td>数据工程同学、治理/审计角色</td>
+<td>区分 required / optional 字段、status enum、reason code 和 downstream decision</td>
+</tr>
+<tr class="odd">
+<td><a href="../assets/templates/week06/week06-backfill-plan-template.json" download="">Backfill Plan JSON 模板</a></td>
+<td><code>reports/week06/backfill/*.json</code></td>
+<td>操作员、助教</td>
+<td>包含 partition、window、expected/current count、gap reason、impact</td>
+</tr>
+<tr class="even">
+<td><a href="../assets/templates/week06/week06-asset-checks-summary.md" download="">Asset Checks Summary 模板</a></td>
+<td><code>reports/week06/asset_checks_summary.md</code></td>
+<td>下游消费方、助教</td>
+<td>5 类 checks 均有结果、reason code 和处理动作</td>
+</tr>
+<tr class="odd">
+<td><a href="../assets/templates/week06/week06-run-evidence-template.json" download="">Run Evidence JSON 模板</a></td>
+<td><code>reports/week06/run_evidence/*.json</code></td>
+<td>Week07 / Week08 / Week11 / Week14</td>
+<td>schema-valid，<code>report_path</code> 真实，optional 依赖不 fake passed</td>
+</tr>
+<tr class="even">
+<td><a href="../assets/templates/week06/data_factory_runbook_v1.md" download="">Data Factory Runbook 模板</a></td>
+<td><code>runbooks/week06-data-factory.md</code></td>
+<td>另一个接手的人</td>
+<td>UI / CLI 两条路径、恢复决策树、checks、evidence、交接句式都可执行</td>
+</tr>
+<tr class="odd">
+<td><a href="../assets/templates/week06/delivery_summary_v1.md" download="">Delivery Summary 模板</a></td>
+<td><code>reports/week06/week06_delivery_summary.md</code></td>
+<td>助教、后续周次</td>
+<td>收口 asset graph、backfill、checks、evidence、限制和下游决策</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="week-7非结构化数据工程" class="level2">
+<h2 class="anchored" data-anchor-id="week-7非结构化数据工程">Week 7：非结构化数据工程</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>模板</th>
+<th>典型文件</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Week07 执行蓝图模板</td>
+<td><a href="../assets/templates/week07/week07_execution_blueprint_v1.md" download="">week07_execution_blueprint_v1.md</a></td>
+<td>写清 Week7 的目标、输入、输出、做/不做边界和验收条件。</td>
+</tr>
+<tr class="even">
+<td>Document Asset Boundary 模板</td>
+<td><a href="../assets/templates/week07/document_asset_boundary_v1.md" download="">document_asset_boundary_v1.md</a></td>
+<td>把 raw document、parsed document、section、chunk、anchor 和 gate 的对象边界写清。</td>
+</tr>
+<tr class="odd">
+<td>Parser Adapter 决策模板</td>
+<td><a href="../assets/templates/week07/parser_adapter_decision_v1.md" download="">parser_adapter_decision_v1.md</a></td>
+<td>说明 Docling-first、Unstructured optional、Azure/OCR/ASR 的边界。</td>
+</tr>
+<tr class="even">
+<td>ADR Parser Adapter Route 模板</td>
+<td><a href="../assets/templates/week07/adr_parser_adapter_route_v1.md" download="">adr_parser_adapter_route_v1.md</a></td>
+<td>用 ADR 形式记录 parser route、fallback、capability warning 和后果。</td>
+</tr>
+<tr class="odd">
+<td>Parse Contract 检查清单</td>
+<td><a href="../assets/templates/week07/parse_contract_checklist_v1.md" download="">parse_contract_checklist_v1.md</a></td>
+<td>校验 section / chunk / anchor 必须保留的关键字段。</td>
+</tr>
+<tr class="even">
+<td>Chunking Strategy 模板</td>
+<td><a href="../assets/templates/week07/chunking_strategy_v1.md" download="">chunking_strategy_v1.md</a></td>
+<td>定义 <code>section_aware_v1</code> 的切片规则和稳定 ID 规则。</td>
+</tr>
+<tr class="odd">
+<td>Evidence Anchor Contract 模板</td>
+<td><a href="../assets/templates/week07/evidence_anchor_contract_v1.md" download="">evidence_anchor_contract_v1.md</a></td>
+<td>约束 citation 只能消费 evidence anchor，不能由 LLM 临时发明。</td>
+</tr>
+<tr class="even">
+<td>Chunk Quality / Gate Report 模板</td>
+<td><a href="../assets/templates/week07/quality_gate_report_v1.md" download="">quality_gate_report_v1.md</a></td>
+<td>记录 metadata、anchor、page/bbox、PII risk、sample_shortfall 和 Week8 准入结论。</td>
+</tr>
+<tr class="odd">
+<td>Week8 Ready Gate 模板</td>
+<td><a href="../assets/templates/week07/week8_ready_gate_v1.json" download="">week8_ready_gate_v1.json</a></td>
+<td>明确哪些 chunks 可以进入 Week8 索引，哪些必须 blocked。</td>
+</tr>
+<tr class="even">
+<td>Bad Case Review 模板</td>
+<td><a href="../assets/templates/week07/bad_case_review_v1.md" download="">bad_case_review_v1.md</a></td>
+<td>复盘 parser、chunk、anchor 或 quality gate 的坏案例和下游影响。</td>
+</tr>
+<tr class="odd">
+<td>Assignment Submission 模板</td>
+<td><a href="../assets/templates/week07/assignment_submission_v1.md" download="">assignment_submission_v1.md</a></td>
+<td>统一 Week7 作业提交包的 scope、evidence、gate、bad case 和限制说明。</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="week-8从搜得到到答得稳检索-生成的一体化工程闭环" class="level2">
+<h2 class="anchored" data-anchor-id="week-8从搜得到到答得稳检索-生成的一体化工程闭环">Week 8：从“搜得到”到“答得稳”——检索 × 生成的一体化工程闭环</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>模板</th>
+<th>典型文件</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Index Manifest 模板</td>
+<td><a href="../assets/templates/week08/index_manifest_template_v1.json" download="">index_manifest_template_v1.json</a></td>
+<td>固定 <code>index_release_id</code>、数据版本、embedding 模型、维度和构建统计。</td>
+</tr>
+<tr class="even">
+<td>RAG Request 模板</td>
+<td><a href="../assets/templates/week08/rag_request_template_v1.json" download="">rag_request_template_v1.json</a></td>
+<td>约束 question、filters、release hints、top_k 和 debug 开关。</td>
+</tr>
+<tr class="odd">
+<td>RAG Response 模板</td>
+<td><a href="../assets/templates/week08/rag_response_template_v1.json" download="">rag_response_template_v1.json</a></td>
+<td>约束 answer、citations、evidence_ids、release ids、trace id 和 no-answer。</td>
+</tr>
+<tr class="even">
+<td>Retrieval Smoke Report 模板</td>
+<td><a href="../assets/templates/week08/retrieval_smoke_report_v1.md" download="">retrieval_smoke_report_v1.md</a></td>
+<td>记录 vector-only、FTS-only、hybrid RRF、filter 和 rerank fallback 结果。</td>
+</tr>
+<tr class="odd">
+<td>RAG API Smoke Report 模板</td>
+<td><a href="../assets/templates/week08/rag_api_smoke_report_v1.md" download="">rag_api_smoke_report_v1.md</a></td>
+<td>记录 <code>/rag/answer</code> 的正例、拒答、权限过滤和结构化响应。</td>
+</tr>
+<tr class="even">
+<td>Smoke Eval Report 模板</td>
+<td><a href="../assets/templates/week08/smoke_eval_report_v1.md" download="">smoke_eval_report_v1.md</a></td>
+<td>记录最小回归用例、schema validity、citation coverage 和 no-answer 行为。</td>
+</tr>
+<tr class="odd">
+<td>Week08 Delivery Summary 模板</td>
+<td><a href="../assets/templates/week08/week08_delivery_summary_v1.md" download="">week08_delivery_summary_v1.md</a></td>
+<td>收口 Week8 的索引、检索、RAG API、审计、限制和架构判断。</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="week-9agent-skills-开放标准把工作流封装成可移植的-skill-pack" class="level2">
+<h2 class="anchored" data-anchor-id="week-9agent-skills-开放标准把工作流封装成可移植的-skill-pack">Week 9：Agent Skills 开放标准——把工作流封装成可移植的 Skill Pack</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>模板</th>
+<th>典型文件</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Skill Pack Manifest 模板</td>
+<td><a href="../assets/templates/week09/skill_pack_manifest_v1.yml" download="">skill_pack_manifest_v1.yml</a></td>
+<td>固定 skill pack 名称、版本、发现目标、发布边界和验收项。</td>
+</tr>
+<tr class="even">
+<td>SKILL.md 模板</td>
+<td><a href="../assets/templates/week09/skill_md_template_v1.md" download="">skill_md_template_v1.md</a></td>
+<td>约束每个 skill 的触发条件、工作流、输入输出、验证命令和不做事项。</td>
+</tr>
+<tr class="odd">
+<td>Skill Validation Report 示例</td>
+<td><a href="../assets/templates/week09/skill_validation_report_v1.json" download="">skill_validation_report_v1.json</a></td>
+<td>记录安装、发现、dry-run、contract check 和 release check 的机器可读结果。</td>
+</tr>
+<tr class="even">
+<td>Week09 Delivery Summary 模板</td>
+<td><a href="../assets/templates/week09/week09_delivery_summary_v1.md" download="">week09_delivery_summary_v1.md</a></td>
+<td>收口 Skill Pack v0.1 的范围、证据、限制、迁移计划和下游 Week10-15 接口。</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="使用建议" class="level2">
+<h2 class="anchored" data-anchor-id="使用建议">使用建议</h2>
+<ol type="1">
+<li>先把正文中要求的最小版本补齐，再考虑做增强版。</li>
+<li>先写边界和判断，再补命令和截图，不要反过来。</li>
+<li>blueprint、runbook、report 三类文件不要混写：
+<ul>
+<li>blueprint 负责设计判断</li>
+<li>runbook 负责执行步骤</li>
+<li>report 负责记录结果与证据</li>
+</ul></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/datapro-lgtm\.github\.io\/geektime-ai-data-engineering-bootcamp-site\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

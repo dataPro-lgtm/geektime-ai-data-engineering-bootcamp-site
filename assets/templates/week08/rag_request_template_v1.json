@@ -1,0 +1,12 @@
+{
+  "question": "How do I recover an Edge Gateway after firmware upgrade failure?",
+  "product_line": "edge-gateway",
+  "actor_role": "support_agent",
+  "visibility_scope": "public",
+  "entitlement_tier": "standard",
+  "top_k": 5,
+  "index_release_id": "index-week08-dev",
+  "data_release_id": "data-week08-dev",
+  "prompt_release_id": "prompt-week08-v1",
+  "include_debug": true
+}

@@ -1,0 +1,18 @@
+{
+  "status": "WARN",
+  "parse_strategy_version": "docling_v1_no_ocr",
+  "chunk_strategy_version": "section_aware_v1",
+  "total_chunks": 0,
+  "ready_chunks": 0,
+  "blocked_chunks": 0,
+  "hard_failures": [],
+  "warnings": [
+    "sample_shortfall"
+  ],
+  "week8_consumption_rule": "consume pass/warn chunks with evidence_anchor only",
+  "do_not_consume": [
+    "chunks without evidence anchors",
+    "chunks with hard gate failures",
+    "chunks blocked by pii_flag or license_tag"
+  ]
+}

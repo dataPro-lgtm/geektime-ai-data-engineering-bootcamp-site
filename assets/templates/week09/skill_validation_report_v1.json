@@ -1,0 +1,32 @@
+{
+  "report_id": "week09-skill-validation-example",
+  "skill_pack_version": "0.1.0",
+  "skill_name": "rag-contract-check",
+  "mode": "fixture",
+  "status": "warning",
+  "inputs_checked": [
+    "skills/rag-contract-check/assets/rag_response.valid.json"
+  ],
+  "checks": [
+    {
+      "name": "citations_present",
+      "status": "passed",
+      "message": "citations array is present and non-empty"
+    },
+    {
+      "name": "audit_sample_available",
+      "status": "not_available",
+      "message": "audit sample was not provided in fixture mode"
+    }
+  ],
+  "findings": [],
+  "artifacts_written": [
+    "reports/week09/rag_contract_check_report.sample.json"
+  ],
+  "trace_id": "trace-week09-example",
+  "release_id": "skill-pack-week09-v0.1.0",
+  "created_at": "2026-05-05T00:00:00Z",
+  "next_actions": [
+    "Attach live audit sample before production release."
+  ]
+}

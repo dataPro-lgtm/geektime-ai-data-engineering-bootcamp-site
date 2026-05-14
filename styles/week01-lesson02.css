@@ -1,0 +1,51 @@
+body.week01-lesson02-page {
+  --lesson02-bg: #f8fafc;
+  --lesson02-bg-2: #f1f5f9;
+  --lesson02-panel: #ffffff;
+  --lesson02-panel-muted: #f8fafc;
+  --lesson02-line: #e2e8f0;
+  --lesson02-line-strong: #cbd5e1;
+  --lesson02-text: #0f172a;
+  --lesson02-muted: #475569;
+  --lesson02-brand: #2563eb;
+  --lesson02-brand-hover: #1d4ed8;
+  --lesson02-brand-soft: #dbeafe;
+  --lesson02-warning: #ea580c;
+  --lesson02-success: #059669;
+  --lesson02-purple: #7c3aed;
+  --lesson-page-bg: var(--lesson02-bg);
+  --lesson-page-bg-2: var(--lesson02-bg-2);
+  --lesson-page-panel: var(--lesson02-panel);
+  --lesson-page-panel-alt: var(--lesson02-panel-muted);
+  --lesson-page-line: var(--lesson02-line);
+  --lesson-page-text: var(--lesson02-text);
+  --lesson-page-muted: var(--lesson02-muted);
+  --lesson-page-brand: var(--lesson02-brand);
+  --lesson-page-brand-hover: var(--lesson02-brand-hover);
+  --lesson-page-warning: var(--lesson02-warning);
+  --lesson-page-success: var(--lesson02-success);
+}
+
+.week01-lesson02-page .quarto-title-block .title {
+  font-weight: 800;
+}
+
+.week01-lesson02-page .eyebrow {
+  color: rgba(226, 232, 240, 0.92);
+  border-color: rgba(148, 163, 184, 0.22);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.week01-lesson02-page .lesson02-scene-grid,
+.week01-lesson02-page .lesson02-judgement-grid,
+.week01-lesson02-page .lesson02-signoff-grid {
+  margin-top: 1.05rem;
+}
+
+.week01-lesson02-page .info-card h3,
+.week01-lesson02-page .surface-panel h3 {
+  color: var(--lesson02-text);
+}
+
+@media (max-width: 991.98px) {
+}

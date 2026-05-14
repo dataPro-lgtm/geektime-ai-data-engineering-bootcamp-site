@@ -1,0 +1,16 @@
+{
+  "index_release_id": "index-week08-dev",
+  "data_release_id": "data-week08-dev",
+  "chunk_strategy_version": "section_aware_v1",
+  "embedding_model": "text-embedding-3-small",
+  "embedding_dim": 1536,
+  "provider": "openai",
+  "built_at": "2026-04-30T00:00:00Z",
+  "source_table": "knowledge_section",
+  "total_chunks": 120,
+  "embedded_chunks": 118,
+  "skipped_chunks": 2,
+  "error_count": 0,
+  "quality_gate": "passed",
+  "notes": "Replace sample values with the actual Week8 index build output."
+}

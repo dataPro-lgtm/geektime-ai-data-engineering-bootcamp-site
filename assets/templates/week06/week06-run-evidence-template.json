@@ -1,0 +1,25 @@
+{
+  "evidence_schema_version": "1.0",
+  "run_id": "week06-run-id",
+  "asset_key": "week06/silver/ticket_fact_partitioned",
+  "partition_key": "2026-04-17",
+  "status": "warning",
+  "started_at": "2026-04-17T00:00:00Z",
+  "finished_at": "2026-04-17T00:00:00Z",
+  "report_path": "reports/week06/run_evidence/example.json",
+  "reason_codes": [
+    "dry_run_no_db_write"
+  ],
+  "checks": [
+    {
+      "name": "manifest_consistency",
+      "status": "passed",
+      "reason_codes": [],
+      "metadata": {}
+    }
+  ],
+  "downstream_decision": "dry_run_only",
+  "known_limitations": [
+    "Week04 or Week05 optional dependency may be not_available in local demo mode."
+  ]
+}

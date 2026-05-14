@@ -1,0 +1,36 @@
+{
+  "manifest_id": "seed_manifest_YYYYMMDD_v1",
+  "manifest_version": "1.0",
+  "created_at": "2026-04-25T00:00:00Z",
+  "created_by": "replace_with_owner",
+  "purpose": "Declare the source files or records for one controlled ingest run.",
+  "source_batch": {
+    "source_system": "replace_with_source_system",
+    "source_type": "database_or_file_or_api",
+    "expected_record_count": 0,
+    "watermark_start": null,
+    "watermark_end": null
+  },
+  "contracts": [
+    {
+      "asset_type": "ticket",
+      "contract_ref": "contracts/data/input_asset_contract_v1.json",
+      "schema_version": "input_asset_contract_v1"
+    }
+  ],
+  "inputs": [
+    {
+      "input_id": "replace_with_input_id",
+      "source_uri": "replace_with_uri",
+      "checksum": "sha256:replace_if_available",
+      "pii_level": "medium",
+      "owner": "replace_with_owner"
+    }
+  ],
+  "gate_policy": {
+    "on_schema_error": "reject",
+    "on_pii_policy_error": "quarantine",
+    "on_quality_warning": "warn",
+    "write_audit_event": true
+  }
+}

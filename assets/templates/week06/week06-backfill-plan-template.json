@@ -1,0 +1,15 @@
+{
+  "partition_key": "2026-04-17",
+  "window_start": "2026-04-17T00:00:00Z",
+  "window_end": "2026-04-18T00:00:00Z",
+  "upstream_manifest_id": "manifest-id-or-not_available",
+  "expected_input_count": 0,
+  "current_output_count": 0,
+  "gap_reason": "dry_run_no_db_write",
+  "proposed_action": "dry_run_only",
+  "idempotency_guard": "Use stable partition_key and source manifest id before any write.",
+  "downstream_impact": "manual_review_required",
+  "operator": "student-name",
+  "timestamp": "2026-04-17T00:00:00Z",
+  "mode": "dry-run"
+}

@@ -1,0 +1,35 @@
+skill_pack:
+  name: omnisupport-skill-pack
+  version: 0.1.0
+  week: 9
+  course_title: "Week 9：Agent Skills 开放标准——把工作流封装成可移植的 Skill Pack"
+  owner: course-team
+  canonical_path: skills/
+  codex_discovery_path: .agents/skills/
+  sync_method: copy
+skills:
+  - name: data-contract-lint
+    source_path: skills/data-contract-lint/SKILL.md
+    codex_path: .agents/skills/data-contract-lint/SKILL.md
+    upstream_weeks: [2]
+    default_mode: dry-run
+  - name: ingest-backfill-runbook
+    source_path: skills/ingest-backfill-runbook/SKILL.md
+    codex_path: .agents/skills/ingest-backfill-runbook/SKILL.md
+    upstream_weeks: [3, 6]
+    default_mode: dry-run
+  - name: rag-contract-check
+    source_path: skills/rag-contract-check/SKILL.md
+    codex_path: .agents/skills/rag-contract-check/SKILL.md
+    upstream_weeks: [8]
+    default_mode: fixture
+  - name: prompt-release
+    source_path: skills/prompt-release/SKILL.md
+    codex_path: .agents/skills/prompt-release/SKILL.md
+    upstream_weeks: [8]
+    default_mode: dry-run
+  - name: release-check
+    source_path: skills/release-check/SKILL.md
+    codex_path: .agents/skills/release-check/SKILL.md
+    upstream_weeks: [4, 5, 6, 7, 8]
+    default_mode: dry-run

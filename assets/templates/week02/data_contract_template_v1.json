@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/contracts/data/input_asset_contract_v1.json",
+  "title": "Input Asset Contract v1",
+  "description": "Template for Week02 data contract. Replace names, required fields, policy rules, and quality checks before use.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "asset_id",
+    "source_system",
+    "asset_type",
+    "owner",
+    "metadata",
+    "payload"
+  ],
+  "properties": {
+    "asset_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_system": {
+      "type": "string",
+      "minLength": 1
+    },
+    "asset_type": {
+      "type": "string",
+      "enum": ["ticket", "document", "audio", "video", "database_event"]
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pii_level", "allowed_roles", "schema_version", "ingested_at"],
+      "properties": {
+        "pii_level": {
+          "type": "string",
+          "enum": ["low", "medium", "high", "restricted"]
+        },
+        "allowed_roles": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "schema_version": {
+          "type": "string"
+        },
+        "manifest_id": {
+          "type": "string"
+        },
+        "ingested_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "description": "Replace this section with modality-specific required fields."
+    }
+  },
+  "x-week02-policy": {
+    "blocked_actions": ["train_model_without_review", "export_raw_pii"],
+    "quality_checks": [
+      "required_fields_present",
+      "pii_policy_respected",
+      "owner_present",
+      "schema_version_present"
+    ],
+    "gate_decisions": ["accept", "warn", "quarantine", "reject"]
+  }
+}

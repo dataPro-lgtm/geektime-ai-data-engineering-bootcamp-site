@@ -1,0 +1,30 @@
+<svg width="960" height="720" viewBox="0 0 960 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="720" rx="32" fill="#081628"/>
+  <rect x="70" y="52" width="820" height="84" rx="22" stroke="#45D5FF" stroke-width="4"/>
+  <text x="480" y="92" fill="#F6FBFF" font-size="30" font-family="PingFang SC, Microsoft YaHei, sans-serif" text-anchor="middle">1. 上游把 pending 改成 in_progress</text>
+  <text x="480" y="122" fill="#A9C8E6" font-size="22" font-family="PingFang SC, Microsoft YaHei, sans-serif" text-anchor="middle">source 还在线，接口也没挂</text>
+
+  <path d="M480 136L480 182" stroke="#45D5FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M464 168L480 188L496 168" stroke="#45D5FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="126" y="198" width="708" height="82" rx="22" stroke="#45D5FF" stroke-width="4"/>
+  <text x="480" y="236" fill="#F6FBFF" font-size="30" font-family="PingFang SC, Microsoft YaHei, sans-serif" text-anchor="middle">2. contract 没有及时更新</text>
+  <text x="480" y="265" fill="#A9C8E6" font-size="22" font-family="PingFang SC, Microsoft YaHei, sans-serif" text-anchor="middle">结构依旧合法，但语义已经漂移</text>
+
+  <path d="M480 280L480 326" stroke="#45D5FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M464 312L480 332L496 312" stroke="#45D5FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="162" y="342" width="636" height="82" rx="22" stroke="#45D5FF" stroke-width="4"/>
+  <text x="480" y="380" fill="#F6FBFF" font-size="30" font-family="PingFang SC, Microsoft YaHei, sans-serif" text-anchor="middle">3. RAG / KPI / route 继续消费旧语义</text>
+  <text x="480" y="409" fill="#A9C8E6" font-size="22" font-family="PingFang SC, Microsoft YaHei, sans-serif" text-anchor="middle">回答偶尔还能对，但已经开始系统性偏移</text>
+
+  <path d="M480 424L480 470" stroke="#45D5FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M464 456L480 476L496 456" stroke="#45D5FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="214" y="486" width="532" height="82" rx="22" stroke="#45D5FF" stroke-width="4"/>
+  <text x="480" y="524" fill="#F6FBFF" font-size="30" font-family="PingFang SC, Microsoft YaHei, sans-serif" text-anchor="middle">4. tool 动作依据被污染</text>
+  <text x="480" y="553" fill="#A9C8E6" font-size="22" font-family="PingFang SC, Microsoft YaHei, sans-serif" text-anchor="middle">系统不会先报错，而是高自信地产生错误动作</text>
+
+  <rect x="246" y="610" width="468" height="58" rx="18" fill="#13253C" stroke="#FFCB71" stroke-width="3"/>
+  <text x="480" y="647" fill="#FFD890" font-size="22" font-family="PingFang SC, Microsoft YaHei, sans-serif" text-anchor="middle">真正危险的是：字段还在，但语义已经变了</text>
+</svg>

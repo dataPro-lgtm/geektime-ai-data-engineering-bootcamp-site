@@ -1,0 +1,6 @@
+field_name,field_description,pii_level,allowed_roles,allowed_actions,blocked_actions,masking_rule,retention_policy,evidence_required,notes
+customer_email,客户邮箱,high,"support_agent,supervisor","view_masked,search_exact_if_authorized","export,auto_generate,train_model","mask_local_part",180d,yes,
+customer_phone,客户手机号,high,supervisor,view_masked,"export,auto_generate,train_model","mask_middle_digits",180d,yes,
+ticket_subject,工单标题,medium,"support_agent,supervisor","retrieve,cite,summarize",train_model,none,365d,yes,
+ticket_body,工单正文,medium,"support_agent,supervisor","retrieve,cite,summarize","export_raw,train_model",redact_detected_pii,365d,yes,
+policy_doc_content,制度文档正文,low,"support_agent,supervisor,bot","retrieve,cite,summarize",none,none,permanent,no,

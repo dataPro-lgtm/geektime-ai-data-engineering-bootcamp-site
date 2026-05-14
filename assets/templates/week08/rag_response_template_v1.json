@@ -1,0 +1,28 @@
+{
+  "answer": "Use the grounded recovery runbook and cite the relevant evidence.",
+  "citations": [
+    {
+      "evidence_id": "ev-edge-gateway-001",
+      "chunk_id": "ks-edge-001",
+      "section_id": "ks-edge-001",
+      "doc_id": "doc-edge-gateway-recovery",
+      "source_id": "manual-edge-gateway-v3",
+      "title": "Edge Gateway Recovery",
+      "page_no": 12,
+      "section_path": "Recovery / Firmware rollback",
+      "bbox": null,
+      "source_url": "s3://omni-documents/edge-gateway/recovery.pdf",
+      "doc_version": "v3",
+      "quote": "Follow the firmware rollback checklist...",
+      "score": 0.91
+    }
+  ],
+  "evidence_ids": ["ev-edge-gateway-001"],
+  "confidence": 0.86,
+  "abstain_reason": null,
+  "release_id": "rag-api-dev",
+  "data_release_id": "data-week08-dev",
+  "index_release_id": "index-week08-dev",
+  "prompt_release_id": "prompt-week08-v1",
+  "trace_id": "trace-week08-demo"
+}

@@ -1,0 +1,21 @@
+metric:
+  name:
+  label:
+  description:
+  source_model:
+  grain:
+    - metric_date
+  measure: metric_value
+  aggregation: sum
+  allowed_dimensions:
+    - product_line
+  allowed_filters:
+    - product_line
+    - data_release_id
+  allowed_roles:
+    - support_ops
+  max_window_days: 31
+  owner:
+  examples:
+    positive:
+    negative:

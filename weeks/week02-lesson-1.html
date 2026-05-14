@@ -1,0 +1,2097 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week02｜课时1｜为什么输入问题会先于模型问题摧毁系统 – 极客时间 AI 数据工程实战营</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/brand/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-83964c086148dbcce42b8b2839afa52a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b6e1a04d849d0c8da8337c83cc104c04.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-83964c086148dbcce42b8b2839afa52a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-bb861a84f4a0f3202d72a8722f862893.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-80ecfb2d39ec7cfa7b96dc7abf51720b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-bb861a84f4a0f3202d72a8722f862893.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Sora:wght@500;600;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap">
+<meta property="og:site_name" content="极客时间 AI 数据工程实战营">
+<meta property="og:image" content="https://datapro-lgtm.github.io/geektime-ai-data-engineering-bootcamp-site/assets/brand/social-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://datapro-lgtm.github.io/geektime-ai-data-engineering-bootcamp-site/assets/brand/social-card.png">
+<link rel="icon" type="image/svg+xml" href="https://datapro-lgtm.github.io/geektime-ai-data-engineering-bootcamp-site/assets/brand/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://datapro-lgtm.github.io/geektime-ai-data-engineering-bootcamp-site/assets/brand/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://datapro-lgtm.github.io/geektime-ai-data-engineering-bootcamp-site/assets/brand/apple-touch-icon.png">
+<script>
+(function () {
+  var syncNavbarActive = function () {
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll(".navbar .nav-link[href]"));
+    if (!navLinks.length) return;
+
+    var normalizedPath = window.location.pathname.replace(/\/index\.html$/, "/");
+    var matcher = function (href) {
+      return href === "./index.html" || href === "../index.html" || href.endsWith("/index.html");
+    };
+
+    if (normalizedPath.indexOf("/appendix/") !== -1) {
+      matcher = function (href) { return href.indexOf("/appendix/index.html") !== -1; };
+    } else if (normalizedPath.match(/\/updates\.html$/)) {
+      matcher = function (href) { return href.indexOf("/updates.html") !== -1; };
+    } else if (normalizedPath.indexOf("/weeks/") !== -1) {
+      matcher = function (href) { return href.indexOf("/weeks/learning.html") !== -1; };
+    }
+
+    navLinks.forEach(function (link) {
+      link.classList.remove("active");
+      link.removeAttribute("aria-current");
+    });
+
+    var active = navLinks.find(function (link) {
+      return matcher(link.getAttribute("href") || "");
+    });
+
+    if (active) {
+      active.classList.add("active");
+      active.setAttribute("aria-current", "page");
+    }
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", syncNavbarActive, { once: true });
+  } else {
+    syncNavbarActive();
+  }
+
+  var path = window.location.pathname;
+  var script = document.createElement("script");
+  script.defer = true;
+  if (path.indexOf("/weeks/week01/") !== -1) {
+    script.src = "../../app.js";
+  } else if (path.indexOf("/weeks/") !== -1 || path.indexOf("/appendix/") !== -1) {
+    script.src = "../app.js";
+  } else {
+    script.src = "./app.js";
+  }
+  document.head.appendChild(script);
+})();
+</script>
+
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed week02-lesson-page quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../assets/brand/logo-mark-inverse.svg" alt="" class="navbar-logo light-content">
+    <img src="../assets/brand/logo-mark-inverse.svg" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">极客时间 AI 数据工程实战营</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">首页</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../weeks/learning.html" aria-current="page"> 
+<span class="menu-text">周次学习</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../appendix/index.html"> 
+<span class="menu-text">附录</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../updates.html"> 
+<span class="menu-text">更新</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week02.html">Week02｜输入确定性保障——数据盘点与数据契约</a></li><li class="breadcrumb-item"><a href="../weeks/week02-lesson-1.html">课时1｜为什么输入问题会先于模型问题摧毁系统</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../assets/brand/logo-lockup-compact.svg" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../assets/brand/logo-lockup-compact-inverse.svg" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">周次学习</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../weeks/week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week01｜从 Demo 到上线：AI 为什么不能直接用？</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week01/lesson01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">课时1｜为什么你的 AI Demo 一上生产就翻车？</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week01/lesson02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">课时2｜知识库问答 + 工单联动怎么定义 Done</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week01/lesson03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">课时3｜别一上来就写 RAG：企业级 AI 到底该走哪条数据工程路线</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week01/lesson04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">课时4｜开营就把工程底座搭起来：项目骨架、风险边界与落地蓝图一次定清</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week01-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">实验｜项目基线与系统蓝图初始化</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week01-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">作业｜把 Demo 思维收口为工程蓝图</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../weeks/week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week02｜输入确定性保障——数据盘点与数据契约</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week02-lesson-1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">课时1｜为什么输入问题会先于模型问题摧毁系统</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week02-lesson-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">课时2｜从资源目录到输入地图：企业数据资产盘点方法论</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week02-lesson-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">课时3｜多模态最小元数据与 PII 分级：文档、音频、视频、工单怎么统一</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week02-lesson-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">课时4｜把 Data Contract 做成工程门禁：Schema、语义、质量、兼容性</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week02-lesson-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">课时5｜契约驱动的采集策略：Manifest、增量窗口、拦截与 Week03 起跑线</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week02-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">实验｜四类数据契约与输入门禁最小闭环</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week02-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">作业｜资产清单、四类契约 v1 与采集计划</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../weeks/week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week03｜采集与入湖——Batch / CDC / Stream 的组合拳</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week03-lesson-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week03｜课时1｜从“能采上来”到“可重复采集”：为什么 ingest 可靠性决定下游一切</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week03-lesson-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week03｜课时2｜批量采集主链路：幂等写入、重跑设计与完整性校验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week03-lesson-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week03｜课时3｜增量与 CDC：cursor、WAL、乱序、去重与“不要轻易承诺 exactly-once”</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week03-lesson-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week03｜课时4｜从任务流到资产流：用 Dagster 组织 ingest、分区与回放</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week03-lesson-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week03｜课时5｜故障自愈与补数：Replay / Backfill / Runbook 怎么把链路拉回正轨</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week03-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">实验｜双源采集最小闭环：ticket + document ingest、state、report、replay</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week03-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">作业｜采集最小链路 v1、Runbook v1 与完整性报告</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../weeks/week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week04｜Lakehouse 底座——Iceberg 快照/演进/性能基线</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week04-lesson-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week04｜课时1｜为什么 AI 数据工程需要“有记忆的表”，而不只是能查的表</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week04-lesson-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week04｜课时2｜Iceberg 的状态模型：snapshot、manifest、metadata log 与 time travel</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week04-lesson-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week04｜课时3｜从 Week3 入湖到 Week4 湖仓：Bronze / Silver 最小表设计与 hidden partitioning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week04-lesson-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week04｜课时4｜PyIceberg 本地最小闭环：Catalog、Warehouse、写入、历史查看、Schema Evolution</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week04-lesson-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week04｜课时5｜性能基线不是调优冲动：files / history / snapshots 视角下的 Week4 验收</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week04-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">实验｜最小 Iceberg 闭环：catalog、warehouse、Bronze/Silver、time travel</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week04-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">作业｜Week04 Lakehouse 最小交付包与 baseline report</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../weeks/week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5：Transform 与语义层——把口径写进工程（给 BI 也给 Agent 用）</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week05-lesson-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week05｜课时1｜为什么 Week5 不是“做几个指标”：把业务口径变成工程接口</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week05-lesson-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week05｜课时2｜dbt 分层不是教条：从 sources / staging / intermediate / marts 到 AI 可消费数据产品</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week05-lesson-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week05｜课时3｜口径能不能负责，不看 SQL 多炫：tests、docs、lineage 与变更影响分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week05-lesson-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week05｜课时4｜语义层的现实主义：MetricFlow、Semantic Models 与本地 dbt Core 的真实边界</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week05-lesson-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week05｜课时5｜不让 Agent 裸写 SQL：受控指标查询工具 v1 的契约、权限与审计设计</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week05-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">实验｜把客服运营口径写进工程：用 dbt 产出 KPI 包，并封装安全指标查询工具 v1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week05-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">作业｜提交 Week5 指标包 v1：形成可负责的口径资产</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../weeks/week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6：资产化数据工厂——编排、回填与可追溯</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week06-lesson-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week06｜课时1｜为什么脚本跑通不等于数据产品可运营</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week06-lesson-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week06｜课时2｜Dagster Assets 与资产图：从任务流到资产流</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week06-lesson-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week06｜课时3｜Partition / Backfill / Replay：把补数做成可控动作</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week06-lesson-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week06｜课时4｜Asset Checks / Metadata / Run Evidence：把“跑过”升级成“可验收”</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week06-lesson-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week06｜课时5｜Data Factory Runbook：从个人脚本到团队可交接系统</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week06-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">实验｜资产图 + 回填 + 证据闭环</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week06-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">作业｜提交 Data Factory v1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../weeks/week07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7：非结构化数据工程</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week07-lesson-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7｜课时1｜为什么“抽出文本”不等于非结构化数据工程</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week07-lesson-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7｜课时2｜智能文档解析：布局、层级、表格、页码、坐标与 provenance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week07-lesson-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7｜课时3｜从 section 到 chunk：结构感知切片与 overlap 边界</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week07-lesson-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7｜课时4｜Evidence Anchor：让每个 chunk 可以回指原文位置</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week07-lesson-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7｜课时5｜解析质量与切片质检：把 Week8 索引准入做成工程门禁</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week07-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">实验｜把 Week3 文档资产升级成 Week8-ready 文档资产</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week07-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">作业｜提交文档资产 v1 与质检报告</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../weeks/week08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8：从“搜得到”到“答得稳”——检索 × 生成的一体化工程闭环</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week08-lesson-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8｜课时1｜为什么“搜得到”不等于“答得稳”：RAG 工程闭环的系统边界</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week08-lesson-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8｜课时2｜索引资产化：Embedding、Index Release、增量更新与回滚边界</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week08-lesson-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8｜课时3｜混合检索：pgvector + PostgreSQL FTS + RRF + Metadata Filter</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week08-lesson-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8｜课时4｜重排与生成门禁：Cross-Encoder rerank、证据筛选与 no-answer 策略</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week08-lesson-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8｜课时5｜RAG API 契约化：结构化输出、引用证据、Prompt as Code、审计日志</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week08-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">实验｜跑通最小 RAG 工程闭环</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week08-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">作业｜提交 RAG Service Pack v1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../weeks/week09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9：Agent Skills 开放标准——把工作流封装成可移植的 Skill Pack</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week09-lesson-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9｜课时1｜为什么 Agent Skills 不是提示词模板，而是工程工艺资产</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week09-lesson-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9｜课时2｜SKILL.md 与 progressive disclosure：让 Agent 按需发现和加载工作流</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week09-lesson-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9｜课时3｜把 Week2-Week8 的规范封装成 5 个最小 skills</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week09-lesson-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9｜课时4｜scripts / references / assets：让 Skill Pack 可执行、可校验、可留证据</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week09-lesson-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9｜课时5｜从 repo-scoped skills 到持续演进：Codex、Claude Code 与 Week10-15 的接口</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week09-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">实验｜跑通 Skill Pack v0.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week09-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">作业｜提交 OmniSupport Skill Pack v0.1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../appendix/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">附录｜术语、模板与阅读</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">术语表</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/templates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">模板库</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/faq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FAQ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/reading-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">阅读清单</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">本页导航</h2>
+   
+  <ul>
+  <li><a href="#为什么输入问题会先于模型问题摧毁系统" id="toc-为什么输入问题会先于模型问题摧毁系统" class="nav-link active" data-scroll-target="#为什么输入问题会先于模型问题摧毁系统">为什么输入问题会先于模型问题摧毁系统</a></li>
+  <li><a href="#这节课解决什么问题" id="toc-这节课解决什么问题" class="nav-link" data-scroll-target="#这节课解决什么问题">这节课解决什么问题</a></li>
+  <li><a href="#参考学习时间5065-分钟" id="toc-参考学习时间5065-分钟" class="nav-link" data-scroll-target="#参考学习时间5065-分钟">参考学习时间（50–65 分钟）</a></li>
+  <li><a href="#学完这节课你应该能做到什么" id="toc-学完这节课你应该能做到什么" class="nav-link" data-scroll-target="#学完这节课你应该能做到什么">学完这节课你应该能做到什么</a></li>
+  <li><a href="#本课产出" id="toc-本课产出" class="nav-link" data-scroll-target="#本课产出">本课产出</a></li>
+  <li><a href="#先看一张总图" id="toc-先看一张总图" class="nav-link" data-scroll-target="#先看一张总图">先看一张总图</a></li>
+  <li><a href="#demo-思维-vs-生产思维" id="toc-demo-思维-vs-生产思维" class="nav-link" data-scroll-target="#demo-思维-vs-生产思维">Demo 思维 vs 生产思维</a></li>
+  <li><a href="#先建立一个生产级判断" id="toc-先建立一个生产级判断" class="nav-link" data-scroll-target="#先建立一个生产级判断">先建立一个生产级判断</a></li>
+  <li><a href="#为什么静默失败比显式报错更危险" id="toc-为什么静默失败比显式报错更危险" class="nav-link" data-scroll-target="#为什么静默失败比显式报错更危险">为什么静默失败比显式报错更危险</a></li>
+  <li><a href="#把输入风险收成三条底线" id="toc-把输入风险收成三条底线" class="nav-link" data-scroll-target="#把输入风险收成三条底线">把输入风险收成三条底线</a></li>
+  <li><a href="#三条底线分别会带来什么成本" id="toc-三条底线分别会带来什么成本" class="nav-link" data-scroll-target="#三条底线分别会带来什么成本">三条底线分别会带来什么成本</a></li>
+  <li><a href="#一个-ai-支持系统最常见的三种静默失败" id="toc-一个-ai-支持系统最常见的三种静默失败" class="nav-link" data-scroll-target="#一个-ai-支持系统最常见的三种静默失败">一个 AI 支持系统最常见的三种静默失败</a>
+  <ul class="collapse">
+  <li><a href="#工单状态枚举悄悄变了但系统还在正常回答" id="toc-工单状态枚举悄悄变了但系统还在正常回答" class="nav-link" data-scroll-target="#工单状态枚举悄悄变了但系统还在正常回答">1. 工单状态枚举悄悄变了，但系统还在“正常回答”</a></li>
+  <li><a href="#文档正文还在但证据字段没了" id="toc-文档正文还在但证据字段没了" class="nav-link" data-scroll-target="#文档正文还在但证据字段没了">2. 文档正文还在，但证据字段没了</a></li>
+  <li><a href="#音频和视频内容能读但边界已经失守" id="toc-音频和视频内容能读但边界已经失守" class="nav-link" data-scroll-target="#音频和视频内容能读但边界已经失守">3. 音频和视频内容能读，但边界已经失守</a></li>
+  </ul></li>
+  <li><a href="#为什么很多团队会先修错地方" id="toc-为什么很多团队会先修错地方" class="nav-link" data-scroll-target="#为什么很多团队会先修错地方">为什么很多团队会先修错地方</a></li>
+  <li><a href="#事故拆解-a工单枚举漂移如何一步步传到工具动作" id="toc-事故拆解-a工单枚举漂移如何一步步传到工具动作" class="nav-link" data-scroll-target="#事故拆解-a工单枚举漂移如何一步步传到工具动作">事故拆解 A：工单枚举漂移如何一步步传到工具动作</a></li>
+  <li><a href="#事故拆解-b文档定位元数据缺失为什么会摧毁证据链" id="toc-事故拆解-b文档定位元数据缺失为什么会摧毁证据链" class="nav-link" data-scroll-target="#事故拆解-b文档定位元数据缺失为什么会摧毁证据链">事故拆解 B：文档定位元数据缺失为什么会摧毁证据链</a></li>
+  <li><a href="#一个实战判断先修-prompt-还是先修输入" id="toc-一个实战判断先修-prompt-还是先修输入" class="nav-link" data-scroll-target="#一个实战判断先修-prompt-还是先修输入">一个实战判断：先修 prompt 还是先修输入</a></li>
+  <li><a href="#行业新信号为什么这件事现在更重要了" id="toc-行业新信号为什么这件事现在更重要了" class="nav-link" data-scroll-target="#行业新信号为什么这件事现在更重要了">行业新信号｜为什么这件事现在更重要了</a></li>
+  <li><a href="#为什么今天的行业实践都在强化输入控制面" id="toc-为什么今天的行业实践都在强化输入控制面" class="nav-link" data-scroll-target="#为什么今天的行业实践都在强化输入控制面">为什么今天的行业实践都在强化输入控制面</a></li>
+  <li><a href="#输入问题如何穿透到-ragtoolaudit-三层" id="toc-输入问题如何穿透到-ragtoolaudit-三层" class="nav-link" data-scroll-target="#输入问题如何穿透到-ragtoolaudit-三层">输入问题如何穿透到 RAG、Tool、Audit 三层</a></li>
+  <li><a href="#动手实践在-omnisupport-copilot-里找到输入控制面的第一批工程入口" id="toc-动手实践在-omnisupport-copilot-里找到输入控制面的第一批工程入口" class="nav-link" data-scroll-target="#动手实践在-omnisupport-copilot-里找到输入控制面的第一批工程入口">动手实践：在 OmniSupport Copilot 里找到输入控制面的第一批工程入口</a>
+  <ul class="collapse">
+  <li><a href="#第-1-步进入项目仓库根目录" id="toc-第-1-步进入项目仓库根目录" class="nav-link" data-scroll-target="#第-1-步进入项目仓库根目录">第 1 步：进入项目仓库根目录</a></li>
+  <li><a href="#第-2-步先看当前已经存在的四类数据契约" id="toc-第-2-步先看当前已经存在的四类数据契约" class="nav-link" data-scroll-target="#第-2-步先看当前已经存在的四类数据契约">第 2 步：先看当前已经存在的四类数据契约</a></li>
+  <li><a href="#第-3-步再看-source-manifest-的入口" id="toc-第-3-步再看-source-manifest-的入口" class="nav-link" data-scroll-target="#第-3-步再看-source-manifest-的入口">第 3 步：再看 source manifest 的入口</a></li>
+  <li><a href="#第-4-步运行一遍-manifest-driven-ingest-的-dry-run" id="toc-第-4-步运行一遍-manifest-driven-ingest-的-dry-run" class="nav-link" data-scroll-target="#第-4-步运行一遍-manifest-driven-ingest-的-dry-run">第 4 步：运行一遍 manifest-driven ingest 的 dry-run</a></li>
+  <li><a href="#第-5-步运行一遍-contract-tests" id="toc-第-5-步运行一遍-contract-tests" class="nav-link" data-scroll-target="#第-5-步运行一遍-contract-tests">第 5 步：运行一遍 contract tests</a></li>
+  <li><a href="#第-6-步写下你的第一轮输入判断" id="toc-第-6-步写下你的第一轮输入判断" class="nav-link" data-scroll-target="#第-6-步写下你的第一轮输入判断">第 6 步：写下你的第一轮输入判断</a></li>
+  </ul></li>
+  <li><a href="#把这节课和课时-25-真正串起来" id="toc-把这节课和课时-25-真正串起来" class="nav-link" data-scroll-target="#把这节课和课时-25-真正串起来">把这节课和课时 2～5 真正串起来</a></li>
+  <li><a href="#本课最容易犯的-4-个误区" id="toc-本课最容易犯的-4-个误区" class="nav-link" data-scroll-target="#本课最容易犯的-4-个误区">本课最容易犯的 4 个误区</a></li>
+  <li><a href="#本课最重要的-7-个判断" id="toc-本课最重要的-7-个判断" class="nav-link" data-scroll-target="#本课最重要的-7-个判断">本课最重要的 7 个判断</a></li>
+  <li><a href="#本课自检清单" id="toc-本课自检清单" class="nav-link" data-scroll-target="#本课自检清单">本课自检清单</a></li>
+  <li><a href="#课后最小行动" id="toc-课后最小行动" class="nav-link" data-scroll-target="#课后最小行动">课后最小行动</a></li>
+  <li><a href="#延伸阅读" id="toc-延伸阅读" class="nav-link" data-scroll-target="#延伸阅读">延伸阅读</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="week02-lesson-1.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li><li><a href="week02-lesson-1.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week02.html">Week02｜输入确定性保障——数据盘点与数据契约</a></li><li class="breadcrumb-item"><a href="../weeks/week02-lesson-1.html">课时1｜为什么输入问题会先于模型问题摧毁系统</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Week02｜课时1｜为什么输入问题会先于模型问题摧毁系统</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="为什么输入问题会先于模型问题摧毁系统" class="level2 hero-block">
+<h2 class="anchored" data-anchor-id="为什么输入问题会先于模型问题摧毁系统">为什么输入问题会先于模型问题摧毁系统</h2>
+<p>这节课不是“数据清洗技巧课”，而是 Week02 的第一道判断题。</p>
+<p>如果你默认把 AI 质量问题都理解成模型问题，后面的资产盘点、最小元数据、PII 分级、Data Contract 和 Manifest 都会被误解成附属治理动作。</p>
+<p>这节课先把一个生产级判断立住：</p>
+<p><strong>企业 AI 系统最危险的状态，不是彻底报错，而是系统看起来还能跑，但已经开始稳定地产生错误事实、错误引用或错误动作。</strong></p>
+<div class="hero-actions">
+<p><a href="../weeks/week02-lesson-2.html" class="btn-primary">进入课时 2</a> <a href="../weeks/week02.html" class="btn-secondary">返回 Week02 总览</a></p>
+</div>
+</section>
+<div class="lesson-handout-fallback">
+<div class="lesson-handout-card" data-handout="true" data-pdf="../assets/handouts/week02-lesson01.pdf" data-docx="../assets/handouts/week02-lesson01.docx">
+<div class="handout-card-title">
+<p>下载讲义</p>
+</div>
+<div class="handout-card-copy">
+<p>提供适合离线阅读的 PDF 版和适合批注整理的 Word 版。</p>
+</div>
+<div class="handout-link-list">
+<p><a href="../assets/handouts/week02-lesson01.pdf" class="handout-link" download="">PDF 版 · 打印 / 离线阅读</a> <a href="../assets/handouts/week02-lesson01.docx" class="handout-link" download="">Word 版 · 批注 / 二次整理</a></p>
+</div>
+</div>
+</div>
+<section id="这节课解决什么问题" class="level2">
+<h2 class="anchored" data-anchor-id="这节课解决什么问题">这节课解决什么问题</h2>
+<p>很多团队一做 AI 项目，就会把注意力几乎全部放在模型、Prompt、Embedding、Reranker 上。</p>
+<p>这些当然重要。</p>
+<p>但如果你真的进入企业场景，很快就会遇到一个更棘手、也更常见的问题：</p>
+<p><strong>模型没换、Prompt 没大改、服务还在跑，但回答开始慢慢变歪。</strong></p>
+<p>这时，真正先坏掉的，往往不是模型，而是输入。</p>
+<p>可能是：</p>
+<ul>
+<li>上游工单状态枚举悄悄变了</li>
+<li>文档重新入库后丢了定位字段</li>
+<li>音频转写进来了，但缺少 <code>speaker_role</code> 或脱敏状态</li>
+<li>一段本该受限的内容，在输入阶段就越过了权限边界</li>
+</ul>
+<p>所以这节课先解决一个生产级判断：</p>
+<blockquote class="blockquote">
+<p>AI 系统最危险的状态，不是彻底报错，而是看起来还能跑，但已经开始稳定地产生错误事实、错误引用或错误动作。</p>
+</blockquote>
+</section>
+<section id="参考学习时间5065-分钟" class="level2">
+<h2 class="anchored" data-anchor-id="参考学习时间5065-分钟">参考学习时间（50–65 分钟）</h2>
+<p>如果你只阅读正文，大约需要 35–40 分钟；如果你跟着 OmniSupport Copilot 项目一起跑一遍本课实践，并顺手看完 contract / manifest / tests，建议预留 50–65 分钟。</p>
+</section>
+<section id="学完这节课你应该能做到什么" class="level2">
+<h2 class="anchored" data-anchor-id="学完这节课你应该能做到什么">学完这节课你应该能做到什么</h2>
+<p>完成这节课后，你应该能做到：</p>
+<ol type="1">
+<li>解释为什么生产里的 AI 失真经常首先是输入问题，而不是模型问题。</li>
+<li>用 <strong>事实底线 / 证据底线 / 边界底线</strong> 这三条线描述输入风险，而不是笼统地说“数据质量不好”。</li>
+<li>说清楚输入问题如何一路穿透到检索、生成、工具和审计层。</li>
+<li>在 OmniSupport Copilot 仓库里找到 Week02 第一批工程入口：<code>contracts/data/*.json</code>、<code>data/seed_manifests/*.json</code>、<code>tests/contract/</code>。</li>
+<li>实际跑过一次最小入口验证，确认 contract、manifest 和 test 在项目里已经接上。</li>
+</ol>
+</section>
+<section id="本课产出" class="level2">
+<h2 class="anchored" data-anchor-id="本课产出">本课产出</h2>
+<p>完成这一讲后，你至少应该得到这 4 个结果：</p>
+<ol type="1">
+<li>你能用“事实底线 / 证据底线 / 边界底线”解释输入问题，而不是笼统地说“数据质量不好”。</li>
+<li>你知道 OmniSupport Copilot 当前项目里，输入确定性相关的第一批工程入口在哪里。</li>
+<li>你已经跑过一轮最小入口验证，看到 contract test 与 manifest-driven ingest 是怎么接起来的。</li>
+<li>你已经能说清：如果系统“看起来还能跑但开始变歪”，你该先从哪一层查起。</li>
+</ol>
+</section>
+<section id="先看一张总图" class="level2">
+<h2 class="anchored" data-anchor-id="先看一张总图">先看一张总图</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../assets/week02/week02-lesson01-risk-chain.png" class="img-fluid figure-img"></p>
+<figcaption>Week02 输入风险传播总图</figcaption>
+</figure>
+</div>
+<p>这张图想表达的不是“链路很长”，而是：</p>
+<p><strong>如果输入侧没有被工程化，后面的每一层都只能在错误基础上继续加工。</strong></p>
+</section>
+<section id="demo-思维-vs-生产思维" class="level2">
+<h2 class="anchored" data-anchor-id="demo-思维-vs-生产思维">Demo 思维 vs 生产思维</h2>
+<p>Demo 里最显眼的是模型问题，生产里最隐蔽的是输入问题。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>维度</th>
+<th>Demo 思维</th>
+<th>生产思维</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>最先看到的问题</td>
+<td>回答不够聪明、格式不够稳</td>
+<td>今天能答、明天变歪，但系统还在跑</td>
+</tr>
+<tr class="even">
+<td>团队最先修什么</td>
+<td>Prompt、模型、reranker</td>
+<td>输入事实、元数据、权限、边界</td>
+</tr>
+<tr class="odd">
+<td>最容易忽略什么</td>
+<td>上游 schema / metadata / PII 漂移</td>
+<td>证据链与运行时 gate</td>
+</tr>
+<tr class="even">
+<td>真正先该修什么</td>
+<td>常常被忽略</td>
+<td>输入控制面</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="先建立一个生产级判断" class="level2">
+<h2 class="anchored" data-anchor-id="先建立一个生产级判断">先建立一个生产级判断</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>关键判断
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>生产环境里最危险的状态，不是系统挂了，而是系统还在跑，并且高自信地错。</p>
+</div>
+</div>
+<p>这也是为什么 Week02 不是“治理补丁周”，而是整门课的数据入口控制面。</p>
+</section>
+<section id="为什么静默失败比显式报错更危险" class="level2">
+<h2 class="anchored" data-anchor-id="为什么静默失败比显式报错更危险">为什么静默失败比显式报错更危险</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>状态</th>
+<th>团队感知</th>
+<th>实际风险</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>显式报错</td>
+<td>很快被发现</td>
+<td>影响明显但可定位</td>
+</tr>
+<tr class="even">
+<td>静默失败</td>
+<td>以为系统没问题</td>
+<td>KPI、引用、动作持续漂移</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="把输入风险收成三条底线" class="level2">
+<h2 class="anchored" data-anchor-id="把输入风险收成三条底线">把输入风险收成三条底线</h2>
+<p>如果你把输入问题都混成“数据质量不好”，后面会很难落地。</p>
+<p>更稳的方式，是先把它们收成三条底线。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>风险线</th>
+<th>守的底线</th>
+<th>常见表现</th>
+<th>对下游的直接伤害</th>
+<th>Week02 对应动作</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>结构化风险</td>
+<td><strong>事实底线</strong></td>
+<td>字段、主键、状态枚举、时间口径、增量窗口漂移</td>
+<td>指标失真、工具动作判断偏差</td>
+<td>资产盘点、schema contract、兼容性判断</td>
+</tr>
+<tr class="even">
+<td>非结构化风险</td>
+<td><strong>证据底线</strong></td>
+<td><code>doc_version</code>、<code>page_no</code>、<code>section_path</code>、时间戳、说话人角色缺失</td>
+<td>检索命中但引用不稳，bad case 难复现</td>
+<td>metadata 规范、provenance、citation 回指</td>
+</tr>
+<tr class="odd">
+<td>合规风险</td>
+<td><strong>边界底线</strong></td>
+<td>PII 未分级、租户边界不清、脱敏状态缺失、角色声明不清</td>
+<td>越权检索、敏感泄露、工具越权</td>
+<td>PII 规则、access policy、gate / quarantine</td>
+</tr>
+</tbody>
+</table>
+<p>你可以把它们记成一句话：</p>
+<ul>
+<li><strong>事实底线</strong>：它说的是不是真的</li>
+<li><strong>证据底线</strong>：我能不能证明它来自哪里</li>
+<li><strong>边界底线</strong>：谁能看、谁能搜、谁能据此行动</li>
+</ul>
+</section>
+<section id="三条底线分别会带来什么成本" class="level2">
+<h2 class="anchored" data-anchor-id="三条底线分别会带来什么成本">三条底线分别会带来什么成本</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>底线失守</th>
+<th>最先受伤的层</th>
+<th>业务后果</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>事实底线</td>
+<td>检索 / 指标 / 路由</td>
+<td>回答变歪、统计失真</td>
+</tr>
+<tr class="even">
+<td>证据底线</td>
+<td>citation / tracing / audit</td>
+<td>无法复盘、无法说服业务</td>
+</tr>
+<tr class="odd">
+<td>边界底线</td>
+<td>权限 / PII / tool</td>
+<td>越权、泄露、违规动作</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="一个-ai-支持系统最常见的三种静默失败" class="level2">
+<h2 class="anchored" data-anchor-id="一个-ai-支持系统最常见的三种静默失败">一个 AI 支持系统最常见的三种静默失败</h2>
+<section id="工单状态枚举悄悄变了但系统还在正常回答" class="level3">
+<h3 class="anchored" data-anchor-id="工单状态枚举悄悄变了但系统还在正常回答">1. 工单状态枚举悄悄变了，但系统还在“正常回答”</h3>
+<p><code>ticket.status</code> 从 <code>pending</code> 改成 <code>in_progress</code>，如果 contract 没跟上，系统不会立刻挂掉；它只是会开始把 KPI、分流逻辑和工具动作一起带偏。</p>
+</section>
+<section id="文档正文还在但证据字段没了" class="level3">
+<h3 class="anchored" data-anchor-id="文档正文还在但证据字段没了">2. 文档正文还在，但证据字段没了</h3>
+<p>文档 chunk 还能被召回，但如果没有 <code>doc_version / page_no / section_path / bbox</code>，回答虽然像对的，引用却不稳，审计也无从下手。</p>
+</section>
+<section id="音频和视频内容能读但边界已经失守" class="level3">
+<h3 class="anchored" data-anchor-id="音频和视频内容能读但边界已经失守">3. 音频和视频内容能读，但边界已经失守</h3>
+<p><code>speaker_role</code>、<code>pii_redaction_flag</code>、<code>frame_ts</code> 这些字段看起来像“补充字段”，但一旦缺失，系统就会失去脱敏、追责、证据定位和权限控制能力。</p>
+</section>
+</section>
+<section id="为什么很多团队会先修错地方" class="level2">
+<h2 class="anchored" data-anchor-id="为什么很多团队会先修错地方">为什么很多团队会先修错地方</h2>
+<p>因为输出最显眼，输入最隐蔽。</p>
+<p>当你看到回答不稳时，很容易先做这些动作：</p>
+<ul>
+<li>换更强模型</li>
+<li>改 Prompt</li>
+<li>提高 top-k</li>
+<li>换 embedding</li>
+<li>增加 reranker</li>
+<li>给 agent 更多自主性</li>
+</ul>
+<p>这些都可能有帮助，但它们经常只是在修症状，而不是修根因。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>你先看到的现象</th>
+<th>团队最常见的第一反应</th>
+<th>更可能的根因</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>工单相关答案忽高忽低</td>
+<td>调 Prompt / 换模型</td>
+<td>状态枚举、时间语义或增量窗口漂移</td>
+</tr>
+<tr class="even">
+<td>文档召回了，但引用不稳</td>
+<td>调 top-k / 调 rerank</td>
+<td>metadata 与定位字段不足</td>
+</tr>
+<tr class="odd">
+<td>某些用户能查到不该看到的内容</td>
+<td>加一道输出审查</td>
+<td>输入阶段 access / PII 边界没有前置</td>
+</tr>
+<tr class="even">
+<td>Tool 动作看似合理但结果经常错</td>
+<td>增加 agent 推理链条</td>
+<td>输入事实和工具边界没有被契约化</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="事故拆解-a工单枚举漂移如何一步步传到工具动作" class="level2">
+<h2 class="anchored" data-anchor-id="事故拆解-a工单枚举漂移如何一步步传到工具动作">事故拆解 A：工单枚举漂移如何一步步传到工具动作</h2>
+<p>以 Northstar Workspace 的工单流为例：</p>
+<ol type="1">
+<li>上游支持系统把 <code>pending</code> 改成 <code>in_progress</code></li>
+<li>API 仍然能返回数据，JSON 结构也没坏</li>
+<li>老 contract 没更新，测试没有及时覆盖到新枚举</li>
+<li>RAG 层开始把一部分工单理解成“未开始处理”</li>
+<li>Tool route 误判状态，开始把本来不该升级的工单送给人工</li>
+</ol>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>阶段</th>
+<th>系统表面上看到什么</th>
+<th>实际发生了什么</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>上游变更</td>
+<td>字段名没变</td>
+<td>语义已经漂移</td>
+</tr>
+<tr class="even">
+<td>contract 未更新</td>
+<td>schema 仍然合法</td>
+<td>运行时意义变了</td>
+</tr>
+<tr class="odd">
+<td>检索 / 生成</td>
+<td>还能正常答</td>
+<td>事实开始偏</td>
+</tr>
+<tr class="even">
+<td>工具动作</td>
+<td>路由看似有理</td>
+<td>动作依据已经错了</td>
+</tr>
+</tbody>
+</table>
+<p>这类问题危险就危险在：系统不是立刻红灯，而是开始稳定地产生“看起来差不多”的错。</p>
+</section>
+<section id="事故拆解-b文档定位元数据缺失为什么会摧毁证据链" class="level2">
+<h2 class="anchored" data-anchor-id="事故拆解-b文档定位元数据缺失为什么会摧毁证据链">事故拆解 B：文档定位元数据缺失为什么会摧毁证据链</h2>
+<p>再看 Northstar Edge Gateway 的产品手册。</p>
+<p>假设解析管线仍然能产出 chunk，但：</p>
+<ul>
+<li><code>page_no</code> 丢了</li>
+<li><code>section_path</code> 丢了</li>
+<li><code>bbox</code> 没保留</li>
+</ul>
+<p>这会导致什么？</p>
+<ol type="1">
+<li>文本依然可以被向量化和召回</li>
+<li>模型依然可能答出“差不多正确”的内容</li>
+<li>但你已经无法证明这句话来自哪一页、哪一段、哪张图</li>
+</ol>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>输入状态</th>
+<th>回答能力</th>
+<th>引用能力</th>
+<th>审计能力</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>只有正文</td>
+<td>可能还能答</td>
+<td>很差</td>
+<td>很差</td>
+</tr>
+<tr class="even">
+<td>正文 + <code>page_no</code></td>
+<td>基本可引用</td>
+<td>较稳</td>
+<td>较稳</td>
+</tr>
+<tr class="odd">
+<td>再加 <code>section_path + bbox + doc_version</code></td>
+<td>可回指、可比对</td>
+<td>稳</td>
+<td>稳</td>
+</tr>
+</tbody>
+</table>
+<p>这就是为什么证据字段不是“锦上添花”，而是后面 Week07 证据链、Week08 引用和 Week14 治理的基础设施。</p>
+</section>
+<section id="一个实战判断先修-prompt-还是先修输入" class="level2">
+<h2 class="anchored" data-anchor-id="一个实战判断先修-prompt-还是先修输入">一个实战判断：先修 prompt 还是先修输入</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>现象</th>
+<th>先查哪里</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>只有少数问法出错</td>
+<td>先看 prompt / retrieval</td>
+</tr>
+<tr class="even">
+<td>相同问题一周前正常、今天开始系统性偏</td>
+<td>先查输入</td>
+</tr>
+<tr class="odd">
+<td>citation 开始失效</td>
+<td>先查 metadata / provenance</td>
+</tr>
+<tr class="even">
+<td>tool 参数开始越界</td>
+<td>先查 policy / contract</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="行业新信号为什么这件事现在更重要了" class="level2">
+<h2 class="anchored" data-anchor-id="行业新信号为什么这件事现在更重要了">行业新信号｜为什么这件事现在更重要了</h2>
+<ol type="1">
+<li>结构化接口与 JSON Schema 在生产系统里越来越重要，因为系统边界正在变成可验证接口。</li>
+<li>多模态系统越来越强调 provenance、citation 和可回指，而不是只看“能不能召回正文”。</li>
+<li>输入问题如果不前置，后面的 agent、tool、audit 都会被动补锅。</li>
+</ol>
+</section>
+<section id="为什么今天的行业实践都在强化输入控制面" class="level2">
+<h2 class="anchored" data-anchor-id="为什么今天的行业实践都在强化输入控制面">为什么今天的行业实践都在强化输入控制面</h2>
+<p>这不是课程自创术语，而是今天企业 AI 工程的主流方向。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>方向</th>
+<th>你该记住什么</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Anthropic agent 实践</td>
+<td>强调 simple, composable patterns，不鼓励一开始就堆复杂 agent 黑盒</td>
+</tr>
+<tr class="even">
+<td>OpenAI Structured Outputs / tools</td>
+<td>把 schema、contract、tool boundary 放到运行时接口中心位置</td>
+</tr>
+<tr class="odd">
+<td>Azure multimodal search</td>
+<td>强调 metadata、filter、annotation、保序和可回指</td>
+</tr>
+<tr class="even">
+<td>NIST AI RMF</td>
+<td>强调风险管理前置，而不是上线后补救</td>
+</tr>
+</tbody>
+</table>
+<p>这些信号都说明同一件事：</p>
+<p><strong>系统越要可靠，越不能把输入当成“先喂进去再说”的黑盒。</strong></p>
+</section>
+<section id="输入问题如何穿透到-ragtoolaudit-三层" class="level2">
+<h2 class="anchored" data-anchor-id="输入问题如何穿透到-ragtoolaudit-三层">输入问题如何穿透到 RAG、Tool、Audit 三层</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>输入问题</th>
+<th>RAG 层怎么坏</th>
+<th>Tool 层怎么坏</th>
+<th>Audit 层怎么坏</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>schema / 枚举漂移</td>
+<td>召回和解释口径变偏</td>
+<td>路由与动作依据失真</td>
+<td>事后很难定位到底哪批数据出了问题</td>
+</tr>
+<tr class="even">
+<td>metadata 缺失</td>
+<td>命中有了但 citation 不稳</td>
+<td>工具拿不到必要上下文</td>
+<td>报告里无法回到原页、原段、原时间</td>
+</tr>
+<tr class="odd">
+<td>PII / access 边界缺失</td>
+<td>检索越权</td>
+<td>工具越权</td>
+<td>合规和追责一起失效</td>
+</tr>
+</tbody>
+</table>
+<p>这也是为什么 Week02 的顺序一定是：</p>
+<ol type="1">
+<li>先盘点资产</li>
+<li>再定义最小元数据和 PII 规则</li>
+<li>再把 Data Contract 做成工程门禁</li>
+<li>最后才把 contract 和 manifest 接进 ingest</li>
+</ol>
+</section>
+<section id="动手实践在-omnisupport-copilot-里找到输入控制面的第一批工程入口" class="level2">
+<h2 class="anchored" data-anchor-id="动手实践在-omnisupport-copilot-里找到输入控制面的第一批工程入口">动手实践：在 OmniSupport Copilot 里找到输入控制面的第一批工程入口</h2>
+<p>这一课不要求你立刻写完四类数据契约，而是先在项目仓库里确认：</p>
+<p>输入确定性并不是一句抽象理念，它已经体现在 contract、manifest 和 tests 这些真实工程对象里。</p>
+<section id="第-1-步进入项目仓库根目录" class="level3">
+<h3 class="anchored" data-anchor-id="第-1-步进入项目仓库根目录">第 1 步：进入项目仓库根目录</h3>
+<p>如果你已经完成 Week01，可以直接在 <code>omnisupport-copilot</code> 仓库根目录继续。 如果还没有完成，请先按 README 启动 Week01 工程基线。</p>
+</section>
+<section id="第-2-步先看当前已经存在的四类数据契约" class="level3">
+<h3 class="anchored" data-anchor-id="第-2-步先看当前已经存在的四类数据契约">第 2 步：先看当前已经存在的四类数据契约</h3>
+<p>重点打开这几个文件：</p>
+<ul>
+<li><code>contracts/data/ticket_contract.json</code></li>
+<li><code>contracts/data/doc_asset_contract.json</code></li>
+<li><code>contracts/data/audio_asset_contract.json</code></li>
+<li><code>contracts/data/video_asset_contract.json</code></li>
+</ul>
+<p>这一轮不要急着逐字段背下来。先回答三个问题：</p>
+<ol type="1">
+<li>这些 contract 在守什么边界？</li>
+<li>哪些字段明显是在守“事实底线”？</li>
+<li>哪些字段明显是在守“证据底线”或“边界底线”？</li>
+</ol>
+<p>你应该观察到什么：</p>
+<ul>
+<li>四类输入已经被建模成明确对象，而不是“后面再补规则”的 loose notes。</li>
+<li>contract 目录已经把输入问题压成 runtime interface，而不是课件附件。</li>
+</ul>
+</section>
+<section id="第-3-步再看-source-manifest-的入口" class="level3">
+<h3 class="anchored" data-anchor-id="第-3-步再看-source-manifest-的入口">第 3 步：再看 source manifest 的入口</h3>
+<p>重点打开：</p>
+<ul>
+<li><code>data/seed_manifests/source_manifest_schema.json</code></li>
+<li><code>data/seed_manifests/manifest_workspace_helpcenter_v1.json</code></li>
+<li><code>data/seed_manifests/manifest_edge_gateway_pdf_v1.json</code></li>
+<li><code>data/seed_manifests/manifest_tickets_synthetic_v1.json</code></li>
+</ul>
+<p>这一轮的观察重点是：</p>
+<ul>
+<li>不同 source 的清单长什么样</li>
+<li>为什么 manifest 不是“随便写个文件列表”</li>
+<li>为什么到了 Week03，ingest 必须由 manifest 驱动</li>
+</ul>
+<p>你应该观察到什么：</p>
+<ul>
+<li>批次不是脚本硬编码，而是 manifest 驱动。</li>
+<li>source、contract、load mode 之间已经开始形成准入链。</li>
+</ul>
+</section>
+<section id="第-4-步运行一遍-manifest-driven-ingest-的-dry-run" class="level3">
+<h3 class="anchored" data-anchor-id="第-4-步运行一遍-manifest-driven-ingest-的-dry-run">第 4 步：运行一遍 manifest-driven ingest 的 dry-run</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose <span class="at">--profile</span> tools <span class="at">--env-file</span> infra/env/.env.local <span class="at">-f</span> infra/docker-compose.yml run <span class="at">--rm</span> devbox <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  python <span class="at">-m</span> pipelines.ingestion.seed_loader <span class="at">--manifest-dir</span> data/seed_manifests</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>你这一步不是为了理解所有实现细节，而是先建立一个判断：</p>
+<p>Week02 的 contract 和 manifest，后面是真的会进入 pipeline 的。</p>
+<p>你应该观察到什么：</p>
+<ul>
+<li>Week02 的终点不是“写完文档”，而是开始做 runtime admission。</li>
+<li>loader 读到的不是抽象概念，而是后续会被 pipeline 消费的对象。</li>
+</ul>
+</section>
+<section id="第-5-步运行一遍-contract-tests" class="level3">
+<h3 class="anchored" data-anchor-id="第-5-步运行一遍-contract-tests">第 5 步：运行一遍 contract tests</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose <span class="at">--profile</span> tools <span class="at">--env-file</span> infra/env/.env.local <span class="at">-f</span> infra/docker-compose.yml run <span class="at">--rm</span> devbox <span class="dt">\</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  pytest tests/contract/ <span class="at">-v</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="你应该看到什么输出" class="level4">
+<h4 class="anchored" data-anchor-id="你应该看到什么输出">你应该看到什么输出</h4>
+<ul>
+<li><code>tests/contract/test_json_schemas.py</code> 被执行</li>
+<li>至少一轮 schema / manifest 校验通过</li>
+<li>如果你故意制造 enum、metadata 或 required 字段错误，测试会失败</li>
+</ul>
+<p>你应该观察到什么：</p>
+<ul>
+<li>contract test 不只是“红了还是绿了”，而是在告诉你哪一层边界开始失守。</li>
+<li>如果错误先在 tests 暴露，通常说明 Week02 的门禁仍然有效，没有把问题拖到下游。</li>
+</ul>
+</section>
+<section id="失败了先查哪-4-个点" class="level4">
+<h4 class="anchored" data-anchor-id="失败了先查哪-4-个点">失败了先查哪 4 个点</h4>
+<ol type="1">
+<li><code>contracts/data/*.json</code> 是否真的更新了而不是只改了蓝图</li>
+<li><code>data/seed_manifests/*.json</code> 是否还引用旧 contract 或旧 source</li>
+<li><code>tests/contract/fixtures/</code> 样例是否和 contract 版本对得上</li>
+<li>本次失败更像事实问题、证据问题还是边界问题</li>
+</ol>
+</section>
+</section>
+<section id="第-6-步写下你的第一轮输入判断" class="level3">
+<h3 class="anchored" data-anchor-id="第-6-步写下你的第一轮输入判断">第 6 步：写下你的第一轮输入判断</h3>
+<p>做完上面 5 步后，至少写下这 3 句话：</p>
+<ol type="1">
+<li>这个项目里，输入确定性目前最先落在哪些文件和命令上。</li>
+<li>如果 contract / manifest 缺失，最先出问题的会是哪一层。</li>
+<li>为什么 Week02 不是“治理补丁周”，而是整门课的数据入口控制面。</li>
+</ol>
+</section>
+</section>
+<section id="把这节课和课时-25-真正串起来" class="level2">
+<h2 class="anchored" data-anchor-id="把这节课和课时-25-真正串起来">把这节课和课时 2～5 真正串起来</h2>
+<p>这一讲负责立判断，后面四讲负责把判断变成工程对象：</p>
+<ul>
+<li><strong>课时2</strong>：把“输入有哪些东西”盘成资产地图</li>
+<li><strong>课时3</strong>：把“最小元数据和 PII”写成统一标准</li>
+<li><strong>课时4</strong>：把 contract 写成能放行、能拦截、能比较的门禁</li>
+<li><strong>课时5</strong>：把 contract 和 manifest 真正接进 ingest 入口</li>
+</ul>
+<p>所以这节课不是独立的理论页，而是 Week02 的起点页。</p>
+</section>
+<section id="本课最容易犯的-4-个误区" class="level2">
+<h2 class="anchored" data-anchor-id="本课最容易犯的-4-个误区">本课最容易犯的 4 个误区</h2>
+<ol type="1">
+<li><strong>把输入问题等同于“数据脏一点”</strong> 实际上它经常是事实、证据、边界三条底线同时松动。</li>
+<li><strong>看到答案不稳就先调模型</strong> 这样很容易把上游错误加工得更像真的。</li>
+<li><strong>把 metadata 当备注</strong> 结果引用、过滤、权限和审计都只能后补。</li>
+<li><strong>把 contract 当文档</strong> 结果输入问题永远拖到 RAG / Tool / Audit 层才暴露。</li>
+</ol>
+</section>
+<section id="本课最重要的-7-个判断" class="level2">
+<h2 class="anchored" data-anchor-id="本课最重要的-7-个判断">本课最重要的 7 个判断</h2>
+<ol type="1">
+<li>生产里更常见的是输入先坏，而不是模型先坏。</li>
+<li>输入风险至少要分成事实底线、证据底线、边界底线三类。</li>
+<li>只修输出层，经常是在修症状，不是在修根因。</li>
+<li>Manifest 不是文件清单，而是一次 ingest 的声明入口。</li>
+<li>Contract 不是文档说明，而是运行时门禁。</li>
+<li>metadata 和 PII 不是附加字段，而是后续 citation、filter、audit 的基础设施。</li>
+<li>Week02 做得越扎实，Week03 之后的 ingest、RAG、Agent、评测与治理越稳。</li>
+</ol>
+</section>
+<section id="本课自检清单" class="level2">
+<h2 class="anchored" data-anchor-id="本课自检清单">本课自检清单</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">我能解释为什么输入问题会早于模型问题摧毁系统。</label></li>
+<li><label><input type="checkbox">我能说清楚事实底线、证据底线、边界底线分别在守什么。</label></li>
+<li><label><input type="checkbox">我能说清 Demo 思维和生产思维在“先修什么”上的根本差异。</label></li>
+<li><label><input type="checkbox">我知道 OmniSupport Copilot 当前项目里 contract、manifest、tests 分别在哪。</label></li>
+<li><label><input type="checkbox">我已经跑过一次 <code>seed_loader</code> dry-run。</label></li>
+<li><label><input type="checkbox">我已经跑过一次 <code>tests/contract/</code>。</label></li>
+<li><label><input type="checkbox">我能说明 Week02 为什么不是治理附属周，而是数据入口控制面。</label></li>
+</ul>
+</section>
+<section id="课后最小行动" class="level2">
+<h2 class="anchored" data-anchor-id="课后最小行动">课后最小行动</h2>
+<p>在进入课时 2 之前，先做这 3 件事：</p>
+<ol type="1">
+<li>把四类 contract 和三份 manifest 打开一遍，不求全懂，但要有地图感。</li>
+<li>跑一遍 <code>seed_loader</code> 和 <code>tests/contract/</code>，确认 Week02 的入口不是空概念。</li>
+<li>写下你当前最担心的一类输入风险：事实、证据，还是边界。</li>
+</ol>
+</section>
+<section id="延伸阅读" class="level2">
+<h2 class="anchored" data-anchor-id="延伸阅读">延伸阅读</h2>
+<ul>
+<li>OmniSupport Copilot 项目 README</li>
+<li>OmniSupport Copilot <code>runbooks/week01-startup.md</code></li>
+<li>Anthropic on building effective agents</li>
+<li>OpenAI Structured Outputs / tools</li>
+<li>Azure multimodal search</li>
+<li>NIST AI RMF for Generative AI</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/datapro-lgtm\.github\.io\/geektime-ai-data-engineering-bootcamp-site\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

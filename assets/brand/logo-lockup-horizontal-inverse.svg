@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 96" fill="none">
+  <rect width="420" height="96" rx="24" fill="transparent"/>
+  <g transform="translate(8 16)">
+  <rect x="9" y="9" width="46" height="46" rx="14" fill="none" stroke="#ecf3ff" stroke-width="2.4"/>
+  <path d="M18 23H24" stroke="#ecf3ff" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+  <path d="M40 23H46" stroke="#ecf3ff" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+  <path d="M18 41H24" stroke="#ecf3ff" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+  <path d="M40 41H46" stroke="#ecf3ff" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+  <path d="M23 38L31.5 29.5L38 34L46 22" stroke="#66b7ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="23" cy="38" r="3.2" fill="#3dd9e6" stroke="#ecf3ff" stroke-width="1.6"/>
+  <circle cx="31.5" cy="29.5" r="3.2" fill="#ffffff" stroke="#ecf3ff" stroke-width="1.6"/>
+  <circle cx="38" cy="34" r="3.2" fill="#66b7ff" stroke="#ecf3ff" stroke-width="1.6"/>
+  <circle cx="46" cy="22" r="3.2" fill="#3dd9e6" stroke="#ecf3ff" stroke-width="1.6"/>
+  <path d="M20 18V13H25" stroke="#ecf3ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+  <path d="M44 13H49V18" stroke="#ecf3ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+  <path d="M49 44V49H44" stroke="#ecf3ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+  <path d="M25 49H20V44" stroke="#ecf3ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+</g>
+  <text x="88" y="39" fill="#ffffff" font-size="27" font-weight="700" font-family="'PingFang SC','Hiragino Sans GB','Noto Sans CJK SC',sans-serif">AI 数据工程实战营</text>
+  <text x="88" y="68" fill="#bdd2f2" font-size="14" font-weight="500" font-family="'Inter','IBM Plex Sans','PingFang SC',sans-serif">GeekTime · 企业 AI 交付蓝图</text>
+</svg>

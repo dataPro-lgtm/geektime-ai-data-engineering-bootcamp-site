@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<link href="../../assets/brand/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-4ffc8ad36dfc2f33c0a8ae3e098b6c10.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.36">
+
+  <title>极客时间 AI 数据工程实战营 – Week01｜Lesson04｜教师演示</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-46784ecb046602971330c0c63a16618e.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="l4-cover" class="slide level2 act-opening live-slide--hero teacher-slide-safe-width live-slide--cover-balanced">
+<h2>项目能不能开工，先看基线和边界定没定</h2>
+<div class="teacher-hero">
+<div class="stage-kicker">
+<p>Lesson04 · 工程基线</p>
+</div>
+<div class="teacher-hero-title">
+别急着写 RAG：项目骨架、风险边界和落地蓝图，为什么第一周就得定？
+</div>
+<div class="hero-subtitle">
+<p>这一讲不再问“仓库能不能先跑起来”，而是先回答：一个企业级 AI 项目，凭什么有资格开工。</p>
+</div>
+<div class="hero-support">
+<p>Week01 要先把工程基线、风险边界和落地蓝图写清。后面 14 周的实现，才不会变成边做边返工。</p>
+</div>
+<div class="hero-chip-row">
+<p><a href="#/l4-conflict" class="hero-chip">E1042 冲突</a> <a href="#/l4-project-overview-a" class="hero-chip">项目全貌</a> <a href="#/l4-baseline-chain" class="hero-chip">基线链条</a> <a href="#/l4-deliverables" class="hero-chip">两份工件</a></p>
+</div>
+</div>
+<aside class="notes">
+<p>Lesson04 的定性要更工程化。 告诉学员：今天不是“怎么搭项目”，而是“项目开工前必须先写清什么”。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="l4-judgement" class="slide level2 live-slide--hero teacher-slide-safe-width live-slide--closing-summary">
+<h2>一句话结论</h2>
+<div class="signal-surface signal-surface--center">
+<div class="signal-kicker">
+本讲唯一主判断
+</div>
+<div class="big-judgement">
+企业级 AI 项目最怕的，不是第一天效果差，<br>而是第一天就没有统一工程基线。
+</div>
+<div class="support-line">
+没有这条基线，后面每一周做得越多，返工越大，责任边界也会越来越糊。
+</div>
+</div>
+<aside class="notes">
+<p>这页直接把 Lesson04 的价值讲出来。 不是“先搭仓库”，而是“先立共同边界”。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="l4-conflict" class="slide level2 act-opening live-slide--compare teacher-slide-safe-width live-slide--conflict-grid">
+<h2>冲突开场：E1042 为什么不是一个“回答”问题</h2>
+<div class="teacher-grid-2col-safe">
+<section id="demo-级系统通常会怎么做" class="comparison-col teacher-card-tight teacher-card-balanced">
+<h3>Demo 级系统通常会怎么做</h3>
+<ul>
+<li>去文档里检索 <code>E1042</code>、<code>rollback</code>、<code>gateway upgrade</code></li>
+<li>拼出一段看起来合理的处理建议</li>
+<li>回答“建议先回滚，再检查依赖版本”</li>
+<li>现场演示时，这个答案往往已经够像“会做事”</li>
+</ul>
+</section>
+<section id="生产级系统还必须继续判断什么" class="comparison-col teacher-card-tight teacher-card-balanced">
+<h3>生产级系统还必须继续判断什么</h3>
+<ul>
+<li>当前客户的 <code>SLA</code> 等级和订阅权限是什么</li>
+<li>这条产品线是否允许自动触发工单或回滚动作</li>
+<li>“回滚”是不是高风险动作，是否必须进 <code>HITL</code></li>
+<li>回答是否必须带证据锚点、<code>trace_id</code>、<code>release_id</code></li>
+<li>是否需要同步写入审计日志</li>
+</ul>
+</section>
+</div>
+<div class="signal-surface signal-surface--center">
+<div class="signal-kicker">
+冲突收口
+</div>
+<div class="big-judgement">
+企业 AI 的难点不在回答，而在负责。
+</div>
+<div class="support-line">
+Week01 要做的，不是先把功能写多，而是先把系统能负责到什么程度写清楚。
+</div>
+</div>
+</section>
+<section id="l4-project-overview-a" class="slide level2 act-copilot live-slide--triptych teacher-slide-safe-width live-slide--project-overview">
+<h2>先看项目全貌：OmniSupport Copilot 到底是什么</h2>
+<div class="teacher-grid-2col-safe">
+<section id="它到底要交付什么" class="case-card teacher-card-tight teacher-card-balanced">
+<h3>它到底要交付什么</h3>
+<div class="case-card-tag">
+项目定义
+</div>
+<ul>
+<li>面向企业支持场景，而不是开放域聊天</li>
+<li>支持问答、证据引用、工单联动、人工介入</li>
+<li>后面再补评测、Tracing、版本与回滚</li>
+</ul>
+</section>
+<section id="它为什么不是只靠-pdf-问答" class="case-card teacher-card-tight teacher-card-balanced">
+<h3>它为什么不是只靠 PDF 问答</h3>
+<div class="case-card-tag">
+业务世界观
+</div>
+<ul>
+<li>帮助中心、FAQ、Release Notes、API 文档、工单</li>
+<li>安装手册、规格说明、接线图、故障排查视频</li>
+<li>教学视频、录屏教程、错误码手册、社区问答</li>
+</ul>
+</section>
+</div>
+<aside class="notes">
+<p>这一页先把项目定义和业务世界观立住。 让学员知道：这不是临时举的 demo，而是一个准生产级支持 Copilot。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="l4-project-overview-b" class="slide level2 act-copilot live-slide--summary teacher-slide-safe-width live-slide--closing-summary">
+<h2>它凭什么能贯穿 15 周</h2>
+<div class="signal-surface signal-surface--center">
+<div class="signal-kicker">
+实施原则
+</div>
+<div class="big-judgement">
+Data-first / Workflow-first / Evidence-first / Release-aware / Dual-scale
+</div>
+<div class="support-line">
+Week01 先立统一蓝图、工程基线、风险边界和验收口径，后面 14 周再逐层补齐能力。
+</div>
+</div>
+<aside class="notes">
+<p>这一页单独把实施原则拎出来。 讲法上要让学员理解：15 周不是东一块西一块，而是围绕这 5 个原则逐层补齐。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="l4-build-sequence" class="slide level2 act-copilot live-slide--figure teacher-slide-safe-width live-slide--visual-balance">
+<h2>OmniSupport Copilot 的整体构建序列</h2>
+<div class="figure-stage">
+<div class="figure-stage-tag">
+15 周构建路线图
+</div>
+<p><img data-src="assets/lesson04-build-sequence.png" class="teacher-figure figure-wide"></p>
+<div class="figure-caption">
+<p>Week01 不是孤立的开营课，而是 <code>Phase 0 - The Keel</code>：先把 mono-repo、compose 基线、contract 模板、项目蓝图和边界清单立住。</p>
+</div>
+</div>
+<aside class="notes">
+<p>这页要把 Week01 放进整条构建序列里看。 不是“先讲一点道理”，而是“先把 keel 立住”。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="l4-baseline-chain" class="slide level2 act-framework live-slide--figure teacher-slide-safe-width live-slide--visual-balance">
+<h2>为什么 Week01 就要先定工程基线</h2>
+<div class="figure-stage">
+<div class="figure-stage-tag">
+级联失败序列
+</div>
+<p><img data-src="assets/lesson04-baseline-failure-chain.png" class="teacher-figure figure-wide"></p>
+<div class="figure-caption">
+<p>如果 Week01 不先定义工程基线，问题不会只停在环境层，而会沿着复现、测试、评测、Trace 到回滚一路传导。</p>
+</div>
+</div>
+<aside class="notes">
+<p>这张图不是讲“环境问题”，而是讲返工是怎样沿链条放大的。 强调基线不先立，后面每一周都在沙地上往上堆。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="l4-boundaries" class="slide level2 act-framework live-slide--figure teacher-slide-safe-width live-slide--visual-balance">
+<h2>三类边界：工程基线真正要写的东西</h2>
+<div class="figure-stage">
+<div class="figure-stage-tag">
+三条边界图
+</div>
+<p><img data-src="assets/lesson04-three-boundaries.png" class="teacher-figure figure-wide"></p>
+<div class="figure-caption">
+<p>工程基线不是一组目录，而是上线前必须先定义的三条边界：系统边界、行为边界、工程边界。</p>
+</div>
+</div>
+<aside class="notes">
+<p>这一页要把“别背目录名，先抓边界”讲透。 因为真正决定系统能不能开工的，不是名词齐不齐，而是边界有没有先写清。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="l4-skeleton-a" class="slide level2 act-framework live-slide--table teacher-slide-safe-width live-slide--table-safe">
+<h2>项目骨架不是目录树，而是生产问题映射：先看底座四层</h2>
+<div class="launch-table">
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>目录</th>
+<th>在课程里的职责</th>
+<th>它解决的生产问题</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>infra/</code></td>
+<td>环境统一与基础依赖</td>
+<td>为什么别人机器上跑不起来？</td>
+</tr>
+<tr class="even">
+<td><code>contracts/</code></td>
+<td>输入输出与动作约束</td>
+<td>哪些规则只是口头说的，没有被系统执行？</td>
+</tr>
+<tr class="odd">
+<td><code>pipelines/</code></td>
+<td>数据资产加工与编排</td>
+<td>输入输出怎么可回放、可重试、可追溯？</td>
+</tr>
+<tr class="even">
+<td><code>services/</code></td>
+<td>RAG 与工具服务化</td>
+<td>能力如何暴露成稳定接口，而不是散落脚本？</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="l4-skeleton-b" class="slide level2 act-framework live-slide--table teacher-slide-safe-width live-slide--table-safe">
+<h2>项目骨架不是目录树，而是生产问题映射：再看负责四层</h2>
+<div class="launch-table">
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>目录</th>
+<th>在课程里的职责</th>
+<th>它解决的生产问题</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>observability/</code></td>
+<td>Tracing / Phoenix / dashboards</td>
+<td>出问题时如何定位证据、版本、动作链？</td>
+</tr>
+<tr class="even">
+<td><code>evals/</code></td>
+<td>评测集与回归机制</td>
+<td>这次优化到底有没有真的变好？</td>
+</tr>
+<tr class="odd">
+<td><code>runbooks/</code></td>
+<td>运维与故障处理手册</td>
+<td>事故发生后，谁按什么步骤恢复？</td>
+</tr>
+<tr class="even">
+<td><code>blueprints/</code></td>
+<td>落地蓝图与共识文档</td>
+<td>团队和后续实现凭什么对齐世界观？</td>
+</tr>
+</tbody>
+</table>
+</div>
+<aside class="notes">
+<p>这页的重点不是目录树本身，而是“这个仓库在为哪类上线风险预留位置”。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="l4-seven-layer" class="slide level2 act-delivery live-slide--figure teacher-slide-safe-width live-slide--visual-balance">
+<h2>七层架构：从输入到负责</h2>
+<div class="figure-stage figure-stage--sidecar">
+<div class="figure-stage-tag">
+七层总图
+</div>
+<div class="teacher-grid-2col-safe">
+<p><img data-src="assets/lesson04-seven-layer-architecture.png" class="teacher-figure figure-wide"></p>
+<div class="figure-caption figure-caption--side">
+<p>真正的企业 AI 系统不是只靠检索和生成两层支撑，而是从 source、contract、raw、parse、lakehouse、serving、agent 到 observability &amp; governance 的完整工程链。</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>这一页承接 Lesson03 的总图，但更靠近开工视角。 强调 Week01 不要求全部做完，但必须知道自己现在站在哪一层、缺的是哪一层。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="l4-baseline-steps-a" class="slide level2 act-delivery live-slide--compare teacher-slide-safe-width live-slide--compact-compare">
+<h2>五步工程基线：前三步先把运行底座站住</h2>
+<div class="teacher-grid-3col-safe">
+<section id="配置隔离" class="step-card teacher-card-tight teacher-card-balanced">
+<h3>01 配置隔离</h3>
+<p><code>.env.example</code> 共享字段契约，机密不写死在代码里。</p>
+</section>
+<section id="环境同构" class="step-card teacher-card-tight teacher-card-balanced">
+<h3>02 环境同构</h3>
+<p>用同一套 Compose 启动服务、网络、卷与依赖。</p>
+</section>
+<section id="能力可验" class="step-card teacher-card-tight teacher-card-balanced">
+<h3>03 能力可验</h3>
+<p>先看关键能力是否可达，而不是只看进程有没有启动。</p>
+</section>
+</div>
+<div class="signal-surface">
+<div class="signal-kicker">
+这三步先站住
+</div>
+<div class="support-line">
+先把环境和能力跑成共同基线，再谈后面的复现、测试和上线。
+</div>
+</div>
+<aside class="notes">
+<p>这一页先只讲前三步。 让学员先理解：没有配置隔离、环境同构、能力可验，后面的回归和签字都没有起点。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="l4-baseline-steps-b" class="slide level2 act-delivery live-slide--compare teacher-slide-safe-width live-slide--compact-compare">
+<h2>五步工程基线：再补后两步，系统才可复现可检查</h2>
+<div class="teacher-grid-2col-safe">
+<section id="输入可复现" class="step-card teacher-card-tight teacher-card-balanced">
+<h3>04 输入可复现</h3>
+<p>准备稳定种子数据，给测试、演示和回归共用。</p>
+</section>
+<section id="边界可检查" class="step-card teacher-card-tight teacher-card-balanced">
+<h3>05 边界可检查</h3>
+<p>契约测试先入场，让系统边界能被自动化检查。</p>
+</section>
+</div>
+<div class="signal-surface signal-surface--center">
+<div class="signal-kicker">
+一句话收口
+</div>
+<div class="big-judgement">
+Week01 的基线演示，本质上是在演示五个工程承诺。
+</div>
+<div class="support-line">
+配置隔离、环境同构、能力可验、输入可复现、边界可检查，缺一项，后面的协作和验收就没有共同基准。
+</div>
+</div>
+<aside class="notes">
+<p>这里不要讲成 shell 教程。 要讲成“五个承诺”，让学员知道每一步都在为后面的协作和验收埋基线。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="l4-risk" class="slide level2 act-delivery live-slide--checklist teacher-slide-safe-width live-slide--risk-grid">
+<h2>风险边界：先把系统允许做什么说清楚</h2>
+<div class="teacher-grid-2col-safe">
+<section id="pii-分级" class="signal-card teacher-card-tight teacher-card-balanced">
+<h3>PII 分级</h3>
+<ul>
+<li><code>P0</code> 公共信息：可以直接使用</li>
+<li><code>P1</code> 低敏业务信息：脱敏后使用</li>
+<li><code>P2</code> 高敏客户信息：工具侧受控读取</li>
+<li><code>P3</code> 强敏感信息：禁止进入模型上下文</li>
+</ul>
+</section>
+<section id="动作边界" class="signal-card teacher-card-tight teacher-card-balanced">
+<h3>动作边界</h3>
+<ul>
+<li>可执行：知识查询、工单状态查询</li>
+<li>受限可执行：创建工单、更新低风险字段</li>
+<li>高风险动作：回滚生产配置，必须进 <code>HITL</code></li>
+<li>禁止动作：越权查看敏感订阅、跳过证据直接下结论</li>
+</ul>
+</section>
+</div>
+<aside class="notes">
+<p>这一页先讲边界本身，不要把 HITL 触发条件也一起塞进来。 先让学员知道系统到底能做什么、不能做什么。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="l4-hitl" class="slide level2 act-delivery live-slide--summary teacher-slide-safe-width live-slide--summary-stack">
+<h2>HITL 不是系统失败，而是系统知道什么时候该停</h2>
+<div class="signal-surface signal-surface--center">
+<div class="signal-kicker">
+HITL triggers
+</div>
+<div class="big-judgement">
+高风险操作 / 证据不足 / 状态冲突 / 权限不足
+</div>
+<div class="support-line">
+<code>HITL</code> 不是系统失败，而是系统知道什么时候不该自己做决定。真正的成熟，不是“什么都自动做”，而是该停的时候会停。
+</div>
+</div>
+<div class="signal-surface signal-surface--center">
+<div class="signal-kicker">
+一句话判断
+</div>
+<div class="big-judgement">
+系统最危险的状态，不是它不会做事，而是它不知道什么时候应该把决定权交还给人。
+</div>
+</div>
+<aside class="notes">
+<p>这一页只讲 HITL 的哲学和触发条件。 让学员把 HITL 理解成成熟系统的刹车，不是失败兜底。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="l4-risk-wrap" class="slide level2 act-delivery live-slide--summary teacher-slide-safe-width live-slide--summary-triad">
+<h2>风险边界：真正要管的是系统行为，而不是法务附录</h2>
+<div class="takeaway-strip">
+<div class="takeaway-item">
+<p><strong>01</strong> <span>PII 分级决定什么能进模型，什么必须停在模型外。</span></p>
+</div>
+<div class="takeaway-item">
+<p><strong>02</strong> <span>动作边界决定系统能查到哪一步、能做到哪一步。</span></p>
+</div>
+<div class="takeaway-item">
+<p><strong>03</strong> <span><code>HITL</code> 负责在高风险、不确定和冲突时把决定权还给人。</span></p>
+</div>
+</div>
+<aside class="notes">
+<p>风险边界的三句话总结页。 如果时间紧，这页可以用来直接收口。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="l4-deliverables" class="slide level2 act-close live-slide--compare teacher-slide-safe-width live-slide--deliverables">
+<h2>Week01 要交的两份工件</h2>
+<div class="teacher-grid-2col-safe">
+<section id="工件-1业务验收口径-风险边界清单" class="signal-surface teacher-card-tight teacher-card-balanced">
+<h3>工件 1｜业务验收口径 &amp; 风险边界清单</h3>
+<ul>
+<li>业务目标、目标用户、高价值场景、禁止场景</li>
+<li><code>PII</code> 分级、动作分级、<code>HITL</code> 节点</li>
+<li>失败与降级策略、验收口径</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a></a><span class="fu">## 业务验收口径 &amp; 风险边界清单 v1</span></span>
+<span id="cb1-2"><a></a><span class="ss">- </span>业务目标：</span>
+<span id="cb1-3"><a></a><span class="ss">- </span>目标用户：</span>
+<span id="cb1-4"><a></a><span class="ss">- </span>禁止场景：</span>
+<span id="cb1-5"><a></a><span class="ss">- </span>HITL 节点：</span>
+<span id="cb1-6"><a></a><span class="ss">- </span>验收口径：</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="工件-2ai-系统落地蓝图" class="signal-surface teacher-card-tight teacher-card-balanced">
+<h3>工件 2｜AI 系统落地蓝图</h3>
+<ul>
+<li>一句话定义、业务世界观、核心对象</li>
+<li>七层架构、技术选型理由、首周运行基线</li>
+<li>后续 14 周演进路线</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource md number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a></a><span class="fu">## AI 系统落地蓝图 v1</span></span>
+<span id="cb2-2"><a></a><span class="ss">- </span>一句话定义：</span>
+<span id="cb2-3"><a></a><span class="ss">- </span>核心对象：</span>
+<span id="cb2-4"><a></a><span class="ss">- </span>七层架构：</span>
+<span id="cb2-5"><a></a><span class="ss">- </span>首周运行基线：</span>
+<span id="cb2-6"><a></a><span class="ss">- </span>后续 14 周路线：</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</div>
+<aside class="notes">
+<p>这页是 Lesson04 的最终收口：Week01 不是只要求“听懂”，而是真要留下两份能持续复用的工件。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="l4-wrap" class="slide level2 act-close live-slide--summary teacher-slide-safe-width live-slide--summary-triad">
+<h2>本讲小结：Week01 解决的是“有没有资格开工”</h2>
+<div class="takeaway-strip">
+<div class="takeaway-item">
+<p><strong>01</strong> <span>工程基线不是目录树，而是边界条件。</span></p>
+</div>
+<div class="takeaway-item">
+<p><strong>02</strong> <span>风险边界不是法务附录，而是系统行为开关。</span></p>
+</div>
+<div class="takeaway-item">
+<p><strong>03</strong> <span>落地蓝图不是汇报材料，而是后续实现与验收的共同基准。</span></p>
+</div>
+</div>
+<aside class="notes">
+<p>这一页就是 Lesson04 的三句话收口。 学员要带着这三句进入 Lab 和 Week02。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="l4-bridge" class="slide level2 act-bridge live-slide--bridge">
+<h2>Week02 过桥：下一周开始先问输入配不配进系统</h2>
+<section id="week01-先把系统有没有资格开工说清楚了" class="bridge-card">
+<h3>Week01 先把系统有没有资格开工说清楚了</h3>
+<p>进入 Week02 后，问题就会进一步收紧成输入门禁：<br>
+不是“先接一点数据试试看”，而是先回答：</p>
+<ul>
+<li>哪些输入资产能进系统</li>
+<li>哪些规则要写成契约</li>
+<li>哪些采集动作必须带着边界进入</li>
+</ul>
+<p><a href="../../weeks/week01-lab.html" class="stage-link">进入 Week01 Lab</a></p>
+</section>
+<aside class="notes">
+<p>这里不直接桥到技术细节，而是桥到“输入门禁”这个下一个判断。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../../assets/brand/logo-mark.svg" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': false,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":false},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: false,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: false,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="teacher-live-act-config" type="application/json">
+    {
+      "eyebrow": "Teacher Live",
+      "acts": [
+        {
+          "key": "opening",
+          "label": "幕 1 · 先定开工条件",
+          "target": "l4-cover",
+          "match": ["l4-cover", "l4-judgement", "l4-conflict"]
+        },
+        {
+          "key": "copilot",
+          "label": "幕 2 · 项目全貌",
+          "target": "l4-project-overview-a",
+          "match": ["l4-project-overview-a", "l4-project-overview-b", "l4-build-sequence"]
+        },
+        {
+          "key": "framework",
+          "label": "幕 3 · 基线与边界",
+          "target": "l4-baseline-chain",
+          "match": ["l4-baseline-chain", "l4-boundaries", "l4-skeleton-a", "l4-skeleton-b"]
+        },
+        {
+          "key": "delivery",
+          "label": "幕 4 · 架构与承诺",
+          "target": "l4-seven-layer",
+          "match": ["l4-seven-layer", "l4-baseline-steps-a", "l4-baseline-steps-b", "l4-risk", "l4-hitl", "l4-risk-wrap"]
+        },
+        {
+          "key": "close",
+          "label": "幕 5 · 工件收口",
+          "target": "l4-deliverables",
+          "match": ["l4-deliverables", "l4-wrap"]
+        },
+        {
+          "key": "bridge",
+          "label": "幕 6 · 过桥",
+          "target": "l4-bridge",
+          "match": ["l4-bridge"]
+        }
+      ]
+    }
+    </script>
+    <script src="../../scripts/teacher-live.js"></script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/datapro-lgtm\.github\.io\/geektime-ai-data-engineering-bootcamp-site\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
